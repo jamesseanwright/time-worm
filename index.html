@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>js13k</title> 
+	</head>
+	<body>
+		<canvas width="800" height="480"></canvas>
+
+		<script>
+			(function () {
+				'use strict';
+				var canvas = document.querySelector('canvas');
+				var width = canvas.width;
+				var height = canvas.height;
+				var ctx = document.querySelector('canvas').getContext('2d');
+				var background = generateBackground();
+
+				function nextFrame(timestamp) {
+					ctx.clearRect(0, 0, width, height);
+					animateBackground();
+					requestAnimationFrame(nextFrame);
+				}
+
+				function generateBackground() {
+					var count = 100;
+					var stars = [];
+
+					for (var i = 0; i < count; i++) {
+						var size = Math.ceil(Math.random() * 3);
+						var speed = 5 * size;
+						stars.push({ 
+							size: size,
+							speed: speed,
+							x: Math.ceil(Math.random() * width),
+							y: Math.ceil(Math.random() * height)
+						});
+					}
+
+					return {
+						fill: 'black',
+						starFill: 'white',
+						stars: stars
+					};
+				}
+
+				function animateBackground() {
+					ctx.fillStyle = background.fill;
+					ctx.fillRect(0, 0, width, height);
+
+					ctx.fillStyle = background.starFill;
+
+					background.stars.forEach(function (star) {
+						ctx.fillRect(star.x, star.y, star.size, star.size);
+						star.x -= star.speed;
+					});
+				}
+
+				requestAnimationFrame(nextFrame);
+			}());
+		</script>
+	</body>
+</html>
