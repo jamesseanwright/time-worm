@@ -15,6 +15,8 @@
 		var key = keyman[e.keyIdentifier.toLowerCase()];
 		if (!key || key.active) return;
 
+		deactivateKeys();
+
 		key.active = true;
 		key.onDown && key.onDown();
 	}
@@ -27,5 +29,13 @@
 		key.onUp && key.onUp();
 	}
 
-	window.keyman = keyman;
+	function deactivateKeys() {
+		for (var keyProp in keyman) {
+			var key = keyman[keyProp];
+			key.active = false;
+			key.onUp && key.onUp();
+		}
+	}
+
+	window.jw.keyman = keyman;
 }());
