@@ -40,8 +40,6 @@
 	}
 
 	function deactivateKeys() {
-		console.log('deactivate');
-
 		for (var keyProp in keyman) {
 			var key = keyman[keyProp];
 

@@ -1,16 +1,12 @@
 (function () {
 	'use strict';
 
-	var canvas = document.querySelector('#game');
-	var gameWidth = canvas.width;
-	var gameHeight = canvas.height;
-	var ctx = canvas.getContext('2d');
 	var keyman = jw.keyman;
 	var speed = 5;
 	var bounceVariant = 10;
 	var bounceSpeed = 1;
 	var x = 10;
-	var y = gameHeight / 2;
+	var y = jw.gameHeight / 2;
 
 	var spriteSize = 48;
 	var bodySprite = new Image();
@@ -28,16 +24,16 @@
 
 	var width = spriteSize * chunks.length;
 
-	ctx.imageSmoothingEnabled = true;
+	jw.ctx.imageSmoothingEnabled = true;
 
 	function nextFrame() {
 		for (var i = 1; i <= chunks.length; i++) {
 			var chunk = chunks[i - 1];
 
-			ctx.clearRect(x + spriteSize * i, y - chunk.yOffset, spriteSize, y + chunk.yOffset);
+			jw.ctx.clearRect(x + spriteSize * i, y - chunk.yOffset, spriteSize, y + chunk.yOffset);
 
 			updateChunkBounce(chunk);
-			ctx.drawImage(chunk.sprite, x + spriteSize * i, y - chunk.yOffset, spriteSize, spriteSize);
+			jw.ctx.drawImage(chunk.sprite, x + spriteSize * i, y - chunk.yOffset, spriteSize, spriteSize);
 		}
 
 		requestAnimationFrame(nextFrame);
