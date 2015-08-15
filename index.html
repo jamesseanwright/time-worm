@@ -52,6 +52,9 @@
 					background.stars.forEach(function (star) {
 						ctx.fillRect(star.x, star.y, star.size, star.size);
 						star.x -= star.speed;
+
+						if (star.x < 0)
+							star.x = width + star.size;
 					});
 				}
 
