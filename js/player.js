@@ -34,7 +34,7 @@
 		for (var i = 1; i <= chunks.length; i++) {
 			var chunk = chunks[i - 1];
 
-			ctx.clearRect(x + spriteSize * i, y - bounceVariant, spriteSize, spriteSize + bounceVariant);
+			ctx.clearRect(x + spriteSize * i, y - chunk.yOffset, spriteSize, y + chunk.yOffset);
 
 			updateChunkBounce(chunk);
 			ctx.drawImage(chunk.sprite, x + spriteSize * i, y - chunk.yOffset, spriteSize, spriteSize);
@@ -60,21 +60,15 @@
 	};
 
 	keyman.up.onDown = function () {
-		interval = setInterval(function () {
-			requestAnimationFrame(function () {
-				//ctx.clearRect(x, y - bounceVariant, width, spriteSize + bounceVariant);
-			});
+		console.log(y);
 
+		interval = setInterval(function () {
 			y -= speed;
 		}, 20);
 	};
 
 	keyman.down.onDown = function () {
 		interval = setInterval(function () {
-			requestAnimationFrame(function () {
-				//ctx.clearRect(x, y - bounceVariant, width, spriteSize + bounceVariant);
-			});
-
 			y += speed;
 		}, 20);
 	};
