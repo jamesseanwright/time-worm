@@ -7,8 +7,8 @@
 	var ctx = canvas.getContext('2d');
 	var keyman = jw.keyman;
 	var speed = 5;
-	var floatVariant = 20;
-	var floatSpeed = 5;
+	var bounceVariant = 15;
+	var bounceSpeed = 1;
 	var x = 10;
 	var y = gameHeight / 2;
 
@@ -21,34 +21,38 @@
 	headSprite.src = 'img/head.svg';
 
 	var chunks = [
-		{ sprite: bodySprite, yOffset: 0 },
-		{ sprite: bodySprite, yOffset: 10 },
-		{ sprite: headSprite, yOffset: 20 }
+		{ sprite: bodySprite, yOffset: -bounceVariant, direction: 'up' },
+		{ sprite: bodySprite, yOffset: 0, direction:' up' },
+		{ sprite: headSprite, yOffset: bounceVariant, direction: 'down' }
 	];
 
 	var width = spriteSize * chunks.length;
 
-	console.log(width);
-
 	ctx.imageSmoothingEnabled = true;
 
 	function nextFrame() {
-		ctx.clearRect(x, y - floatVariant, width, spriteSize + floatVariant + 5);
+		for (var i = 1; i <= chunks.length; i++) {
+			var chunk = chunks[i - 1];
 
-		chunks.forEach(function (chunk, i) {
+			ctx.clearRect(x + spriteSize * i, y - bounceVariant, spriteSize, spriteSize + bounceVariant);
+
+			updateChunkBounce(chunk);
 			ctx.drawImage(chunk.sprite, x + spriteSize * i, y - chunk.yOffset, spriteSize, spriteSize);
-		});
-
-
-		// ctx.beginPath();
-		// ctx.moveTo(x, y);
-		// ctx.lineTo(x + width, y + height);
-		// ctx.lineTo(x, y + height);
-		// ctx.closePath();
-		// ctx.fillStyle = 'red';
-		// ctx.fill();
+		}
 
 		requestAnimationFrame(nextFrame);
+	}
+
+	function updateChunkBounce(chunk) {
+		if (chunk.yOffset === bounceVariant)
+			chunk.direction = 'up';
+		else if (chunk.yOffset === -bounceVariant)
+			chunk.direction = 'down';
+
+		if (chunk.direction === 'down')
+			chunk.yOffset += bounceSpeed;
+		else
+			chunk.yOffset -= bounceSpeed;
 	}
 
 	window.onload = function () {
@@ -57,12 +61,20 @@
 
 	keyman.up.onDown = function () {
 		interval = setInterval(function () {
+			requestAnimationFrame(function () {
+				//ctx.clearRect(x, y - bounceVariant, width, spriteSize + bounceVariant);
+			});
+
 			y -= speed;
 		}, 20);
 	};
 
 	keyman.down.onDown = function () {
 		interval = setInterval(function () {
+			requestAnimationFrame(function () {
+				//ctx.clearRect(x, y - bounceVariant, width, spriteSize + bounceVariant);
+			});
+
 			y += speed;
 		}, 20);
 	};

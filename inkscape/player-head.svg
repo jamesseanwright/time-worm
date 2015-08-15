@@ -63,7 +63,7 @@
        x2="8.6841555"
        y2="1041.2251"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.92956888,0,0,1.2598977,0.8869803,-270.94113)" />
+       gradientTransform="matrix(0.92956888,0,0,1.8420519,0.8869803,-877.83191)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -72,9 +72,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="16"
-     inkscape:cx="-6.8773569"
-     inkscape:cy="14.612278"
+     inkscape:zoom="64"
+     inkscape:cx="8.7692384"
+     inkscape:cy="7.2165343"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -125,26 +125,16 @@
        sodipodi:nodetypes="ccccccccccc" />
     <path
        style="fill:url(#linearGradient4312);fill-opacity:1;stroke:none;stroke-width:0.0970417;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 13.006032,1042.5107 0,1.7818 c -11.0344328,0.6161 -8.6940427,-2.0513 0,-1.7818 z"
+       d="m 13.006032,1042.5196 0,2.6051 c -11.0344328,0.9008 -8.6940427,-2.9992 0,-2.6051 z"
        id="rect4304"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
     <ellipse
        style="fill:#b3b3b3;fill-opacity:1;stroke:none;stroke-width:0.0970417;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none"
        id="path4321"
-       cx="6.2167974"
-       cy="1043.6063"
-       rx="0.17382812"
-       ry="0.15429688" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#666666;stroke-width:0.07571318;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
-       d="m 6.315621,1043.5415 -0.2015538,0.1339"
-       id="path4323"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#666666;stroke-width:0.07571318;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
-       d="m 6.289903,1043.7071 -0.1501188,-0.1899"
-       id="path4323-8"
-       inkscape:connector-curvature="0" />
+       cx="6.2324224"
+       cy="1044.1304"
+       rx="0.37695312"
+       ry="0.33459884" />
   </g>
 </svg>
