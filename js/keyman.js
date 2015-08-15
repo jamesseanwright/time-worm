@@ -5,24 +5,34 @@
 		up: { active: false, onDown: null, onUp: null },
 		down: { active: false, onDown: null, onUp: null },
 		left: { active: false, onDown: null, onUp: null },
-		right: { active: false, onDown: null, onUp: null }
+		right: { active: false, onDown: null, onUp: null },
+		space: { active: false, onDown: null, onUp: null, simultaneous: true } // SPACE
+	};
+
+	var codeMapping = {
+		38: 'up',
+		40: 'down',
+		37: 'left',
+		39: 'right',
+		32: 'space'
 	};
 
 	window.addEventListener('keydown', handleKeyDown);
 	window.addEventListener('keyup', handleKeyUp);
 
 	function handleKeyDown(e) {
-		var key = keyman[e.keyIdentifier.toLowerCase()];
+		var key = keyman[codeMapping[e.keyCode]];
+
 		if (!key || key.active) return;
 
-		deactivateKeys();
+		!key.simultaneous && deactivateKeys();
 
 		key.active = true;
 		key.onDown && key.onDown();
 	}
 
 	function handleKeyUp(e) {
-		var key = keyman[e.keyIdentifier.toLowerCase()];
+		var key = keyman[codeMapping[e.keyCode]];
 		if (!key || !key.active) return;
 
 		key.active = false;
@@ -30,10 +40,15 @@
 	}
 
 	function deactivateKeys() {
+		console.log('deactivate');
+
 		for (var keyProp in keyman) {
 			var key = keyman[keyProp];
-			key.active = false;
-			key.onUp && key.onUp();
+
+			if (!key.simultaneous) {
+				key.active = false;
+				key.onUp && key.onUp();
+			}
 		}
 	}
 

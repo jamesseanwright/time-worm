@@ -7,12 +7,12 @@
 	var ctx = canvas.getContext('2d');
 	var keyman = jw.keyman;
 	var speed = 5;
-	var bounceVariant = 15;
+	var bounceVariant = 10;
 	var bounceSpeed = 1;
 	var x = 10;
 	var y = gameHeight / 2;
 
-	var spriteSize = 64;
+	var spriteSize = 48;
 	var bodySprite = new Image();
 	var headSprite = new Image();
 	var interval;
@@ -76,4 +76,12 @@
 	keyman.up.onUp = keyman.down.onUp = function () {
 		clearInterval(interval);
 	};
+
+	keyman.space.onDown = function () {
+		jw.laser.addBeam({
+			x: width + 10,
+			y: y + 10,
+			speed: 20
+		});
+	}
 }());
