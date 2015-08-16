@@ -7,6 +7,7 @@
 	var bounceSpeed = 1;
 	var x = 10;
 	var y = jw.gameHeight / 2;
+	var health = 4;
 
 	var spriteSize = 48;
 	var bodySprite = new Image();
@@ -20,14 +21,29 @@
 	var chunks = generateChunks();
 	var width = spriteSize * chunks.length;
 
+	function decrementHealth() {
+		if (--health === 0) {
+			// game over
+		}
+	}
+
+	function getByPosition(sourceX, sourceY, sourceWidth, sourceHeight) {
+		var isHit = sourceX + sourceWidth >= x
+				&& sourceX <= x + width
+				&& sourceY >= y
+				&& sourceY + sourceHeight <= y + height;
+
+		return isHit;
+	}
+
 	function generateChunks() {
 		var chunks = [];
 		var sprite;
 		var yOffset;
 
-		for (var i = 1; i <= jw.game.health; i++) {
-			yOffset = Math.round(bounceVariant * 2 / jw.game.health * i);
-			sprite = i === jw.game.health ? headSprite : bodySprite;
+		for (var i = 1; i <= health; i++) {
+			yOffset = Math.round(bounceVariant * 2 / health * i);
+			sprite = i === health ? headSprite : bodySprite;
 			chunks.push({ sprite: sprite, yOffset: yOffset, direction: yOffset > 0 ? 'up': 'down' });
 		}
 
@@ -38,7 +54,7 @@
 		for (var i = 1; i <= chunks.length; i++) {
 			var chunk = chunks[i - 1];
 
-			ctx.clearRect(x + spriteSize * i, y - chunk.yOffset, spriteSize, y + chunk.yOffset);
+			ctx.clearRect(x + spriteSize * i, y - bounceVariant + chunk.yOffset, spriteSize, y + bounceVariant + chunk.yOffset);
 
 			updateChunkBounce(chunk);
 			ctx.drawImage(chunk.sprite, x + spriteSize * i, y - chunk.yOffset, spriteSize, spriteSize);
@@ -85,7 +101,13 @@
 		jw.laser.addBeam({
 			x: width + 10,
 			y: y + 10,
-			speed: 20
+			speed: 20,
+			target: 'enemy'
 		});
-	}
+	};
+
+	jw.player = {
+		getByPosition: getByPosition,
+		decrementHealth: decrementHealth
+	};
 }());

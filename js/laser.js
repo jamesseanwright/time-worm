@@ -21,20 +21,29 @@
 
 		beams.forEach(function (beam) {
 			var enemy;
+			var player;
+
+			if (beam.target === 'enemy') {
+				enemy = jw.enemy.getByPosition(beam.x, beam.y, width, height);
+
+				if (enemy) {
+					enemy.dead = beam.hasHit = true;
+					jw.game.points += 100;
+				}
+			} else if (beam.target === 'player') {
+				player = jw.player.getByPosition(beam.x, beam.y, width, height);
+
+				if (player) {
+					jw.player.decrementHealth();
+					beam.hasHit = true;
+				}
+			}
 
 			ctx.clearRect(beam.x, beam.y, width, height);
 			beam.x += beam.speed;
 
 			ctx.fillStyle = 'yellow';
 			ctx.fillRect(beam.x, beam.y, width, height);
-
-			enemy = jw.enemy.getByPosition(beam.x, beam.y, width, height);
-
-			if (enemy) {
-				enemy.dead = beam.hasHit = true;
-				jw.game.points += 100;
-				ctx.clearRect(beam.x, beam.y, width, height);
-			}
 		});
 
 		requestAnimationFrame(nextFrame);
