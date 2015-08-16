@@ -3,7 +3,7 @@
 
 	var keyman = jw.keyman;
 	var speed = 5;
-	var bounceVariant = 10;
+	var bounceVariant = 15;
 	var bounceSpeed = 1;
 	var x = 10;
 	var y = jw.gameHeight / 2;
@@ -17,13 +17,22 @@
 	bodySprite.src = 'img/body.png';
 	headSprite.src = 'img/head.png';
 
-	var chunks = [
-		{ sprite: bodySprite, yOffset: -bounceVariant, direction: 'up' },
-		{ sprite: bodySprite, yOffset: 0, direction:' up' },
-		{ sprite: headSprite, yOffset: bounceVariant, direction: 'down' }
-	];
-
+	var chunks = generateChunks();
 	var width = spriteSize * chunks.length;
+
+	function generateChunks() {
+		var chunks = [];
+		var sprite;
+		var yOffset;
+
+		for (var i = 1; i <= jw.game.health; i++) {
+			yOffset = Math.round(bounceVariant * 2 / jw.game.health * i);
+			sprite = i === jw.game.health ? headSprite : bodySprite;
+			chunks.push({ sprite: sprite, yOffset: yOffset, direction: yOffset > 0 ? 'up': 'down' });
+		}
+
+		return chunks;
+	}
 
 	function nextFrame() {
 		for (var i = 1; i <= chunks.length; i++) {
