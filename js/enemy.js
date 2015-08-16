@@ -4,9 +4,12 @@
 	var lastUpdate = Date.now();
 	var updateInterval = 10000;
 	var enemies = [];
-	var width = 50;
-	var height = 50;
-	var speed = 5;
+	var width = 60;
+	var height = 32;
+	var speed = 7;
+	var sprite = new Image();
+
+	sprite.src = 'img/enemy.png';
 
 	var enemy = {
 		getByPosition: getByPosition
@@ -41,14 +44,15 @@
 		enemies.forEach(function (enemy) {
 			jw.ctx.clearRect(enemy.x, enemy.y, width, height);
 			enemy.x -= speed;
-			jw.ctx.fillStyle = 'red';
-			jw.ctx.fillRect(enemy.x, enemy.y, width, height);
+			jw.ctx.drawImage(sprite, enemy.x, enemy.y, width, height);
 		});
 
 		requestAnimationFrame(nextFrame);
 	}
 
-	requestAnimationFrame(nextFrame);
+	window.addEventListener('load', function () {
+		requestAnimationFrame(nextFrame);
+	});
 
 	jw.enemy = enemy;
 }());

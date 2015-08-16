@@ -13,8 +13,8 @@
 	var headSprite = new Image();
 	var interval;
 
-	bodySprite.src = 'img/body.svg';
-	headSprite.src = 'img/head.svg';
+	bodySprite.src = 'img/body.png';
+	headSprite.src = 'img/head.png';
 
 	var chunks = [
 		{ sprite: bodySprite, yOffset: -bounceVariant, direction: 'up' },
@@ -51,9 +51,9 @@
 			chunk.yOffset -= bounceSpeed;
 	}
 
-	window.onload = function () {
+	window.addEventListener('load', function () {
 		requestAnimationFrame(nextFrame);
-	};
+	});
 
 	keyman.up.onDown = function () {
 		console.log(y);

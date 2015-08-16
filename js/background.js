@@ -17,7 +17,7 @@
 
 		for (var i = 0; i < count; i++) {
 			var size = Math.ceil(Math.random() * 3);
-			var speed = 3 * size;
+			var speed = 2 * size;
 			stars.push({ 
 				size: size,
 				speed: speed,
