@@ -1,9 +1,6 @@
 (function () {
 	'use strict';
-	var canvas = document.querySelector('#background');
-	var width = canvas.width;
-	var height = canvas.height;
-	var ctx = canvas.getContext('2d');
+	var ctx = document.querySelector('#background').getContext('2d');
 	var background = generateBackground();
 
 	function nextFrame(timestamp) {
@@ -21,8 +18,8 @@
 			stars.push({ 
 				size: size,
 				speed: speed,
-				x: Math.ceil(Math.random() * width),
-				y: Math.ceil(Math.random() * height)
+				x: Math.ceil(Math.random() * jw.gameWidth),
+				y: Math.ceil(Math.random() * jw.gameHeight)
 			});
 		}
 
@@ -40,7 +37,7 @@
 			
 			star.x -= star.speed;
 			if (star.x + star.size < 0)
-				star.x = width + star.size;
+				star.x = jw.gameWidth + star.size;
 			
 			ctx.fillRect(star.x, star.y, star.size, star.size);
 		});

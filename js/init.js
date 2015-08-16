@@ -1,14 +1,19 @@
 (function () {
 	'use strict';
 
-	var canvas = document.querySelector('#game');
-
 	// namespacing
 	window.jw = {
 		// commonly-used globals
-		canvas: canvas,
-		gameWidth: canvas.width,
-		gameHeight: canvas.height,
-		ctx: canvas.getContext('2d')
+		gameWidth: 1024,
+		gameHeight: 720
 	};
+
+	window.addEventListener('load', function () {
+		var canvasElements = document.querySelectorAll('canvas');
+
+		for (var i = 0; i < canvasElements.length; i++) {
+			canvasElements[i].width = jw.gameWidth;
+			canvasElements[i].height = jw.gameHeight;
+		}
+	});
 }());

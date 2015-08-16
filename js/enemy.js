@@ -8,6 +8,7 @@
 	var height = 32;
 	var speed = 7;
 	var sprite = new Image();
+	var ctx = document.querySelector('#enemy').getContext('2d');
 
 	sprite.src = 'img/enemy.png';
 
@@ -15,9 +16,10 @@
 		getByPosition: getByPosition
 	};
 
-	function getByPosition(x, y, sourceHeight) {
+	function getByPosition(x, y, sourceWidth, sourceHeight) {
 		return enemies.filter(function (enemy) {
-			return x >= enemy.x
+			return x + sourceWidth >= enemy.x
+				&& x <= enemy.x + width
 				&& y >= enemy.y
 				&& y + sourceHeight <= enemy.y + height;
 		})[0];
@@ -35,16 +37,16 @@
 
 		enemies = enemies.filter(function (enemy) {
 			if (enemy.dead) {
-				jw.ctx.clearRect(enemy.x, enemy.y, width, height);
+				ctx.clearRect(enemy.x, enemy.y, width, height);
 			}
 
 			return !enemy.dead && enemy.x + width > 0;
 		});
 
 		enemies.forEach(function (enemy) {
-			jw.ctx.clearRect(enemy.x, enemy.y, width, height);
+			ctx.clearRect(enemy.x, enemy.y, width, height);
 			enemy.x -= speed;
-			jw.ctx.drawImage(sprite, enemy.x, enemy.y, width, height);
+			ctx.drawImage(sprite, enemy.x, enemy.y, width, height);
 		});
 
 		requestAnimationFrame(nextFrame);

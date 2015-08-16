@@ -12,6 +12,7 @@
 	var bodySprite = new Image();
 	var headSprite = new Image();
 	var interval;
+	var ctx = document.querySelector('#player').getContext('2d');
 
 	bodySprite.src = 'img/body.png';
 	headSprite.src = 'img/head.png';
@@ -24,16 +25,14 @@
 
 	var width = spriteSize * chunks.length;
 
-	jw.ctx.imageSmoothingEnabled = true;
-
 	function nextFrame() {
 		for (var i = 1; i <= chunks.length; i++) {
 			var chunk = chunks[i - 1];
 
-			jw.ctx.clearRect(x + spriteSize * i, y - chunk.yOffset, spriteSize, y + chunk.yOffset);
+			ctx.clearRect(x + spriteSize * i, y - chunk.yOffset, spriteSize, y + chunk.yOffset);
 
 			updateChunkBounce(chunk);
-			jw.ctx.drawImage(chunk.sprite, x + spriteSize * i, y - chunk.yOffset, spriteSize, spriteSize);
+			ctx.drawImage(chunk.sprite, x + spriteSize * i, y - chunk.yOffset, spriteSize, spriteSize);
 		}
 
 		requestAnimationFrame(nextFrame);

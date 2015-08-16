@@ -4,6 +4,7 @@
 	var beams = [];
 	var width = 50;
 	var height = 5;
+	var ctx = document.querySelector('#laser').getContext('2d');
 
 	var laser = {
 		addBeam: addBeam
@@ -21,17 +22,18 @@
 		beams.forEach(function (beam) {
 			var enemy;
 
-			jw.ctx.clearRect(beam.x, beam.y, width, height);
+			ctx.clearRect(beam.x, beam.y, width, height);
 			beam.x += beam.speed;
 
-			jw.ctx.fillStyle = 'yellow';
-			jw.ctx.fillRect(beam.x, beam.y, width, height);
+			ctx.fillStyle = 'yellow';
+			ctx.fillRect(beam.x, beam.y, width, height);
 
-			enemy = jw.enemy.getByPosition(beam.x + width, beam.y, height);
+			enemy = jw.enemy.getByPosition(beam.x, beam.y, width, height);
 
 			if (enemy) {
 				enemy.dead = beam.hasHit = true;
-				jw.ctx.clearRect(beam.x, beam.y, width, height);
+				jw.game.points += 100;
+				ctx.clearRect(beam.x, beam.y, width, height);
 			}
 		});
 
