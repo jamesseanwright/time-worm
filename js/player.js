@@ -6,7 +6,8 @@
 	var bounceVariant = 15;
 	var bounceSpeed = 1;
 	var x = 10;
-	var y = jw.gameHeight / 2;
+	//var y = jw.gameHeight / 2;
+	var y = 50;
 	var health = 4;
 
 	var spriteSize = 48;
@@ -54,16 +55,16 @@
 		for (var i = 1; i <= chunks.length; i++) {
 			var chunk = chunks[i - 1];
 
-			ctx.clearRect(x + spriteSize * i, y - bounceVariant + chunk.yOffset, spriteSize, y + bounceVariant + chunk.yOffset);
-
-			updateChunkBounce(chunk);
+			updateChunkBounce(chunk, i);
 			ctx.drawImage(chunk.sprite, x + spriteSize * i, y - chunk.yOffset, spriteSize, spriteSize);
 		}
 
 		requestAnimationFrame(nextFrame);
 	}
 
-	function updateChunkBounce(chunk) {
+	function updateChunkBounce(chunk, i) {
+		ctx.clearRect(x + spriteSize * i, y - chunk.yOffset - bounceVariant, spriteSize, spriteSize + bounceVariant * 2);
+
 		if (chunk.yOffset === bounceVariant)
 			chunk.direction = 'up';
 		else if (chunk.yOffset === -bounceVariant)
