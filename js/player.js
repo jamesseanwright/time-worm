@@ -22,7 +22,7 @@
 	var chunks = generateChunks();
 	var width = spriteSize * chunks.length;
 
-	function decrementHealth() {
+	function onHit() {
 		if (--health === 0) {
 			// game over
 		}
@@ -32,9 +32,9 @@
 		var isHit = sourceX + sourceWidth >= x
 				&& sourceX <= x + width
 				&& sourceY >= y
-				&& sourceY + sourceHeight <= y + height;
+				&& sourceY + sourceHeight <= y + spriteSize;
 
-		return isHit;
+		return this;
 	}
 
 	function generateChunks() {
@@ -109,6 +109,6 @@
 
 	jw.player = {
 		getByPosition: getByPosition,
-		decrementHealth: decrementHealth
+		onHit: onHit
 	};
 }());

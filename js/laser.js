@@ -16,7 +16,7 @@
 
 	function nextFrame() {
 		beams = beams.filter(function (beam) {
-			return beam.x <= jw.gameWidth && !beam.hasHit;
+			return (beam.x + width > 0) && beam.x <= jw.gameWidth && !beam.hasHit;
 		});
 
 		beams.forEach(function (beam) {
@@ -27,8 +27,8 @@
 			target = jw[beam.target].getByPosition(beam.x, beam.y, width, height);
 
 			if (target) {
-				target.dead = beam.hasHit = true;
-				jw.game.points += 100;
+				target.onHit();
+				beam.hasHit = true;
 			} else {
 				beam.x += beam.speed;
 
