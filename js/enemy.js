@@ -31,7 +31,6 @@
 			enemies.push({
 				x: jw.gameWidth + width,
 				y: Math.ceil(Math.random() * jw.gameHeight),
-				lastLaser: Date.now(),
 				onHit: function () {
 					this.dead = true;
 				}
@@ -52,15 +51,13 @@
 			ctx.clearRect(enemy.x, enemy.y, width, height);
 			enemy.x -= speed;
 
-			if (Date.now() - enemy.lastLaser > laserInterval) {
+			if (!enemy.lastLaser || Date.now() - enemy.lastLaser > laserInterval) {
 				jw.laser.addBeam({
-					x: enemy.x - 50,
+					x: enemy.x,
 					y: enemy.y + 15,
 					speed: -20,
 					target: 'player'
 				});
-
-				console.log(enemy.x - 50, enemy.y + 15);
 
 				enemy.lastLaser = Date.now();
 			}

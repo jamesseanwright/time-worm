@@ -34,7 +34,7 @@
 				&& sourceY >= y
 				&& sourceY + sourceHeight <= y + spriteSize;
 
-		return this;
+		return isHit ? this : null;
 	}
 
 	function generateChunks() {
@@ -81,8 +81,6 @@
 	});
 
 	keyman.up.onDown = function () {
-		console.log(y);
-
 		interval = setInterval(function () {
 			y -= speed;
 		}, 20);
