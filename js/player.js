@@ -30,7 +30,11 @@
 
 		chunks = generateChunks();
 		width = spriteSize * chunks.length;
-		jw.events.add('playerHit', this);
+		jw.events.add('playerHit', {
+			x: x,
+			y: y,
+			health: health
+		});
 	}
 
 	function getByPosition(sourceX, sourceY, sourceWidth, sourceHeight) {
@@ -54,6 +58,14 @@
 		}
 
 		return chunks;
+	}
+
+	function onRewindStart() {
+
+	}
+
+	function onPlay() {
+
 	}
 
 	function nextFrame() {
@@ -101,6 +113,14 @@
 		clearInterval(interval);
 	};
 
+	keyman.left.onDown = function () {
+		jw.events.rewind();
+	};
+
+	keyman.left.onUp = function () {
+		jw.events.play();
+	};
+
 	keyman.space.onDown = function () {
 		jw.laser.addBeam({
 			x: width + 10,
@@ -112,6 +132,10 @@
 
 	jw.player = {
 		getByPosition: getByPosition,
-		onHit: onHit
+		onHit: onHit,
+		onRewindStart: onRewindStart,
+		onPlay: onPlay
 	};
+
+	jw.events.register('playerHit', jw.player);
 }());

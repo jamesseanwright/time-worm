@@ -3,11 +3,16 @@
 
 	var trackingThreshold = 5000;
 	var events = [];
+	var registrations = {};
 
 	function invalidate() {
 		events = events.filter(function (evt) {
 			return Date.now() - evt.time <= trackingThreshold;
 		});
+	}
+
+	function register(type, ref) {
+		registrations[type] = ref;
 	}
 
 	function add(type, data) {
@@ -24,13 +29,30 @@
 		});
 	}
 
-	function get() {
+	function rewind(type) {
+		var startTime;
+
 		invalidate();
-		return events;
+
+		Object.keys(registrations).forEach(function (type) {
+			registrations[type].onRewindStart();
+		});
+
+		events.forEach(function (evt) { 
+
+		});
+	}
+
+	function play() {
+		Object.keys(registrations).forEach(function (type) {
+			registrations[type].onPlay();
+		});
 	}
 
 	jw.events = {
 		add: add,
-		get: get
+		register: register,
+		rewind: rewind,
+		play: play
 	};
 }());

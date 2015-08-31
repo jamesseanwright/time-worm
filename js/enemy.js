@@ -29,16 +29,30 @@
 
 	function nextFrame() {
 		if (Date.now() - lastUpdate > Math.ceil(Math.random() * updateInterval)) {
-			enemies.push({
+			var newEnemy = {
 				x: jw.gameWidth + width,
 				y: Math.ceil(Math.random() * jw.gameHeight),
+
 				onHit: function () {
 					this.dead = true;
 					jw.game.points += killedScore;
-					jw.events.add('enemyKilled', this);
-				}
-			});
+					jw.events.add('enemyKilled', {
+						x: enemy.x,
+						y: enemy.y
+					});
+				},
 
+				onRewindStart: function () {
+
+				},
+
+				onPlay: function () {
+
+				}
+			};
+
+			enemies.push(newEnemy);
+			jw.events.register('enemyKilled', newEnemy);
 			lastUpdate = Date.now();
 		}
 
