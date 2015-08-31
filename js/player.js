@@ -6,7 +6,6 @@
 	var bounceVariant = 15;
 	var bounceSpeed = 1;
 	var x = 10;
-	//var y = jw.gameHeight / 2;
 	var y = 50;
 	var health = 4;
 
@@ -24,8 +23,13 @@
 
 	function onHit() {
 		if (--health === 0) {
-			// game over
+			alert('game over, bro');
 		}
+
+		ctx.clearRect(x + spriteSize, y - bounceVariant, width, spriteSize + bounceVariant * 2);
+
+		chunks = generateChunks();
+		width = spriteSize * chunks.length;
 	}
 
 	function getByPosition(sourceX, sourceY, sourceWidth, sourceHeight) {

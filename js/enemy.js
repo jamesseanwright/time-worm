@@ -3,11 +3,12 @@
 
 	var lastUpdate = Date.now();
 	var updateInterval = 10000;
-	var laserInterval = 2000;
+	var laserInterval = 3000;
 	var enemies = [];
 	var width = 60;
 	var height = 32;
 	var speed = 7;
+	var killedScore = 100;
 	var sprite = new Image();
 	var ctx = document.querySelector('#enemy').getContext('2d');
 
@@ -33,6 +34,7 @@
 				y: Math.ceil(Math.random() * jw.gameHeight),
 				onHit: function () {
 					this.dead = true;
+					jw.game.points += killedScore;
 				}
 			});
 
@@ -48,14 +50,16 @@
 		});
 
 		enemies.forEach(function (enemy) {
+			var isLaserInitial = (!enemy.lastLaser && enemy.x + width <= jw.gameWidth);
+
 			ctx.clearRect(enemy.x, enemy.y, width, height);
 			enemy.x -= speed;
 
-			if (!enemy.lastLaser || Date.now() - enemy.lastLaser > laserInterval) {
+			if (isLaserInitial || Date.now() - enemy.lastLaser > laserInterval) {
 				jw.laser.addBeam({
 					x: enemy.x,
 					y: enemy.y + 15,
-					speed: -20,
+					speed: -15,
 					target: 'player'
 				});
 
