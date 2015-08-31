@@ -11,6 +11,8 @@
 	var killedScore = 100;
 	var sprite = new Image();
 	var ctx = document.querySelector('#enemy').getContext('2d');
+	var isRewinding = false;
+	var decelerationRate = 0;
 
 	sprite.src = 'img/enemy.png';
 
@@ -28,7 +30,10 @@
 	}
 
 	function nextFrame() {
-		if (Date.now() - lastUpdate > Math.ceil(Math.random() * updateInterval)) {
+		if (isRewinding && decelerationRate < speed * 2)
+			decelerationRate += 0.2
+
+		if (!isRewinding && Date.now() - lastUpdate > Math.ceil(Math.random() * updateInterval)) {
 			var newEnemy = {
 				x: jw.gameWidth + width,
 				y: Math.ceil(Math.random() * jw.gameHeight),
@@ -36,29 +41,37 @@
 				onHit: function () {
 					this.dead = true;
 					jw.game.points += killedScore;
-					jw.events.add('enemyKilled', {
+					jw.events.add('enemyDestroyed', {
 						x: enemy.x,
 						y: enemy.y
 					});
 				},
 
 				onRewindStart: function () {
-
+					isRewinding = true;
 				},
 
 				onPlay: function () {
-
+					isRewinding = false;
+					decelerationRate = 0;
 				}
 			};
 
 			enemies.push(newEnemy);
-			jw.events.register('enemyKilled', newEnemy);
+			jw.events.register('enemyDestroyed', newEnemy);
 			lastUpdate = Date.now();
 		}
 
 		enemies = enemies.filter(function (enemy) {
 			if (enemy.dead) {
 				ctx.clearRect(enemy.x, enemy.y, width, height);
+			}
+
+			if (enemy.x + width < 0) {
+				jw.events.add('enemyDestroyed', {
+					x: enemy.x,
+					y: enemy.y
+				});
 			}
 
 			return !enemy.dead && enemy.x + width > 0;
@@ -68,9 +81,10 @@
 			var isLaserInitial = (!enemy.lastLaser && enemy.x + width <= jw.gameWidth);
 
 			ctx.clearRect(enemy.x, enemy.y, width, height);
-			enemy.x -= speed;
 
-			if (isLaserInitial || Date.now() - enemy.lastLaser > laserInterval) {
+			enemy.x -= speed - decelerationRate;
+
+			if (!isRewinding && (isLaserInitial || Date.now() - enemy.lastLaser > laserInterval)) {
 				jw.laser.addBeam({
 					x: enemy.x,
 					y: enemy.y + 15,
