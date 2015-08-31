@@ -30,6 +30,7 @@
 
 		chunks = generateChunks();
 		width = spriteSize * chunks.length;
+		jw.events.add('playerHit', this);
 	}
 
 	function getByPosition(sourceX, sourceY, sourceWidth, sourceHeight) {

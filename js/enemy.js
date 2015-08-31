@@ -35,6 +35,7 @@
 				onHit: function () {
 					this.dead = true;
 					jw.game.points += killedScore;
+					jw.events.add('enemyKilled', this);
 				}
 			});
 
