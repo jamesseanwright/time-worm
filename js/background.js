@@ -2,7 +2,6 @@
 	'use strict';
 	var ctx = document.querySelector('#background').getContext('2d');
 	var background = generateBackground();
-	var decelerationRate = 0;
 	var isRewinding = false;
 
 	jw.events.register('bg', background);
@@ -13,7 +12,6 @@
 
 	function onPlay() {
 		isRewinding = false;
-		decelerationRate = 0;
 	}
 
 	function nextFrame(timestamp) {
@@ -31,6 +29,7 @@
 			stars.push({ 
 				size: size,
 				speed: speed,
+				decelerationRate: 0,
 				x: Math.ceil(Math.random() * jw.gameWidth),
 				y: Math.ceil(Math.random() * jw.gameHeight)
 			});
@@ -45,15 +44,18 @@
 	}
 
 	function animateBackground() {
-		if (isRewinding && decelerationRate < 8)
-			decelerationRate += 0.5;
-
 		ctx.fillStyle = background.starFill;
 
 		background.stars.forEach(function (star) {
-			ctx.clearRect(star.x, star.y, star.size, star.size);
-			
-			star.x -= star.speed - decelerationRate;
+			if (!isRewinding)
+				star.decelerationRate = 0;
+
+			else if (isRewinding && star.decelerationRate < star.speed * 2)
+				star.decelerationRate += 0.5;
+
+			ctx.clearRect(star.x - star.decelerationRate, star.y - star.decelerationRate, star.size + star.decelerationRate, star.size + star.decelerationRate);
+
+			star.x -= star.speed - star.decelerationRate;
 
 			if (star.x + star.size < 0)
 				star.x = jw.gameWidth + star.size;
