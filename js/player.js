@@ -64,6 +64,10 @@
 
 	}
 
+	function onRewindFrame(data) {
+		console.log(data);
+	}
+
 	function onPlay() {
 
 	}
@@ -134,6 +138,7 @@
 		getByPosition: getByPosition,
 		onHit: onHit,
 		onRewindStart: onRewindStart,
+		onRewindFrame: onRewindFrame,
 		onPlay: onPlay
 	};
 

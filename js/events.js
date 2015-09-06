@@ -21,16 +21,10 @@
 			data: data,
 			time: Date.now()
 		});
-
-		console.log('new event tracked!', {
-			type: type,
-			data: data,
-			time: Date.now()
-		});
 	}
 
 	function rewind(type) {
-		var startTime;
+		var startTime = Date.now();
 
 		invalidate();
 
@@ -38,8 +32,8 @@
 			registrations[type].onRewindStart();
 		});
 
-		events.forEach(function (evt) { 
-
+		events.forEach(function (evt) {
+			setTimeout(registrations[evt.type].onRewindFrame.bind(registrations[type], evt.data), startTime - evt.time);
 		});
 	}
 

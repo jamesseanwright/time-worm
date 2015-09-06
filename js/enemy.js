@@ -38,7 +38,7 @@
 				x: jw.gameWidth + width,
 				y: Math.ceil(Math.random() * jw.gameHeight),
 
-				onHit: function () {
+				onHit: function onHit() {
 					this.dead = true;
 					jw.game.points += killedScore;
 					jw.events.add('enemyDestroyed', {
@@ -47,11 +47,15 @@
 					});
 				},
 
-				onRewindStart: function () {
+				onRewindStart: function onRewindStart() {
 					isRewinding = true;
 				},
 
-				onPlay: function () {
+				onRewindFrame: function onRewindFrame(data) {
+					console.log(data);
+				},
+
+				onPlay: function onPlay() {
 					isRewinding = false;
 					decelerationRate = 0;
 				}
