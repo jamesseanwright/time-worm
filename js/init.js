@@ -4,8 +4,8 @@
 	// namespacing
 	window.jw = {
 		// commonly-used globals
-		gameWidth: 1024,
-		gameHeight: 720
+		gameWidth: 800,
+		gameHeight: 600
 	};
 
 	window.addEventListener('load', function () {

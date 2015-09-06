@@ -8,6 +8,7 @@
 	var x = 10;
 	var y = 50;
 	var health = 4;
+	var maxHealth = 4;
 
 	var spriteSize = 48;
 	var bodySprite = new Image();
@@ -61,11 +62,14 @@
 	}
 
 	function onRewindStart() {
-
+		ctx.clearRect(x, y, width, spriteSize);
 	}
 
 	function onRewindFrame(data) {
-		console.log(data);
+		if (health < maxHealth) {
+			health++;
+			chunks = generateChunks();
+		}
 	}
 
 	function onPlay() {

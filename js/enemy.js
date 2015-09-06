@@ -29,40 +29,44 @@
 		})[0];
 	}
 
+	function addEnemy(x, y) {
+		var newEnemy = {
+			x: jw.gameWidth + width,
+			y: Math.ceil(Math.random() * jw.gameHeight),
+
+			onHit: function onHit() {
+				this.dead = true;
+				jw.game.points += killedScore;
+				jw.events.add('enemyDestroyed', {
+					x: enemy.x,
+					y: enemy.y
+				});
+			},
+
+			onRewindStart: function onRewindStart() {
+				isRewinding = true;
+			},
+
+			onRewindFrame: function onRewindFrame(data) {
+				addEnemy(data.x, data.y);
+			},
+
+			onPlay: function onPlay() {
+				isRewinding = false;
+				decelerationRate = 0;
+			}
+		};
+
+		enemies.push(newEnemy);
+		jw.events.register('enemyDestroyed', newEnemy);
+	}
+
 	function nextFrame() {
 		if (isRewinding && decelerationRate < speed * 2)
 			decelerationRate += 0.2
 
 		if (!isRewinding && Date.now() - lastUpdate > Math.ceil(Math.random() * updateInterval)) {
-			var newEnemy = {
-				x: jw.gameWidth + width,
-				y: Math.ceil(Math.random() * jw.gameHeight),
-
-				onHit: function onHit() {
-					this.dead = true;
-					jw.game.points += killedScore;
-					jw.events.add('enemyDestroyed', {
-						x: enemy.x,
-						y: enemy.y
-					});
-				},
-
-				onRewindStart: function onRewindStart() {
-					isRewinding = true;
-				},
-
-				onRewindFrame: function onRewindFrame(data) {
-					console.log(data);
-				},
-
-				onPlay: function onPlay() {
-					isRewinding = false;
-					decelerationRate = 0;
-				}
-			};
-
-			enemies.push(newEnemy);
-			jw.events.register('enemyDestroyed', newEnemy);
+			addEnemy();
 			lastUpdate = Date.now();
 		}
 
@@ -71,9 +75,11 @@
 				ctx.clearRect(enemy.x, enemy.y, width, height);
 			}
 
-			if (enemy.x + width < 0) {
+			/* so enemies that have left the screen can
+			 * subsequently be restored */
+			if (enemy.x + width < -64) {
 				jw.events.add('enemyDestroyed', {
-					x: enemy.x,
+					x: -64,
 					y: enemy.y
 				});
 			}

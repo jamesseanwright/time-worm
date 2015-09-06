@@ -16,6 +16,8 @@
 	}
 
 	function add(type, data) {
+		invalidate();
+
 		events.push({
 			type: type,
 			data: data,
@@ -26,8 +28,6 @@
 	function rewind(type) {
 		var startTime = Date.now();
 
-		invalidate();
-
 		Object.keys(registrations).forEach(function (type) {
 			registrations[type].onRewindStart();
 		});
@@ -35,6 +35,8 @@
 		events.forEach(function (evt) {
 			setTimeout(registrations[evt.type].onRewindFrame.bind(registrations[type], evt.data), startTime - evt.time);
 		});
+
+		setTimeout(play, trackingThreshold);
 	}
 
 	function play() {
