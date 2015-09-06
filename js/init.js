@@ -15,5 +15,7 @@
 			canvasElements[i].width = jw.gameWidth;
 			canvasElements[i].height = jw.gameHeight;
 		}
+
+		jw.game.incrementPoints(0);
 	});
 }());

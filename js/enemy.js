@@ -36,7 +36,7 @@
 
 			onHit: function onHit() {
 				this.dead = true;
-				jw.game.points += killedScore;
+				jw.game.incrementPoints(killedScore);
 				jw.events.add('enemyDestroyed', {
 					x: enemy.x,
 					y: enemy.y

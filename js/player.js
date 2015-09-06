@@ -24,7 +24,7 @@
 
 	function onHit() {
 		if (--health === 0) {
-			alert('game over, bro');
+			jw.game.gameOver();
 		}
 
 		ctx.clearRect(x + spriteSize, y - bounceVariant, width, spriteSize + bounceVariant * 2);
