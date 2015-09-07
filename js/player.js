@@ -122,11 +122,13 @@
 	};
 
 	keyman.left.onDown = function () {
-		jw.events.rewind();
+		if (jw.game.canRewind)
+			jw.events.rewind();
 	};
 
 	keyman.left.onUp = function () {
-		jw.events.play();
+		if (jw.game.canRewind)
+			jw.events.play();
 	};
 
 	keyman.space.onDown = function () {

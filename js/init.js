@@ -17,5 +17,6 @@
 		}
 
 		jw.game.incrementPoints(0);
+		jw.game.incrementRewinds();
 	});
 }());
