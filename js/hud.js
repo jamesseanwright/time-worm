@@ -6,9 +6,14 @@
 	var leftMargin = 50;
 	var primaryFontSize = 32;
 	var subtitleFontSize = 28;
-	var clockSpriteSize = 28;
 	var fontFamily = 'Courier New';
 
+	window.addEventListener('load', function () {
+		requestAnimationFrame(function () {
+			ctx.drawImage(jw.clock.sprite, (leftMargin + jw.gameWidth / 3) + 25, topMargin - 3, jw.clock.spriteSize, jw.clock.spriteSize);
+		});
+	});
+	
 	function renderPoints(points) {
 		requestAnimationFrame(function () {
 			ctx.clearRect(leftMargin, topMargin, jw.gameWidth / 3, primaryFontSize);
@@ -20,10 +25,10 @@
 
 	function renderRewinds(rewinds) {
 		requestAnimationFrame(function () {
-			ctx.clearRect(leftMargin + jw.gameWidth / 3, topMargin, (jw.gameWidth / 3) * 2, clockSpriteSize);
+			ctx.clearRect(leftMargin + jw.gameWidth / 3, topMargin, 20, primaryFontSize);
 			ctx.fillStyle = 'white';
 			ctx.font = primaryFontSize + 'px ' + fontFamily;
-			ctx.fillText(rewinds + ' rewinds', leftMargin + jw.gameWidth / 3, topMargin + 20);
+			ctx.fillText(rewinds, leftMargin + jw.gameWidth / 3, topMargin + 20);
 		});
 	}
 
