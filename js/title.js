@@ -18,5 +18,12 @@
 			ctx.fillText('jamesswright.co.uk', (jw.gameWidth / 3) -35, (jw.gameHeight / 2) + 30 + primaryFontSize);
 			ctx.fillText('Click to play!', (jw.gameWidth / 3) + 5, (jw.gameHeight / 2) + 30 + primaryFontSize + subtitleFontSize * 2);
 		});
+
+		canvas.addEventListener('click', function () {
+			var instructionsCanvas = document.querySelector('#instructions');
+			instructionsCanvas.style.display = 'block';
+			canvas.style.display = 'none';
+			jw.instructions.render();
+		});
 	});
 }());
