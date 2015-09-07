@@ -1,19 +1,19 @@
 (function () {
 	'use strict';
 
-	var maxRewinds = 2;
-
 	jw.game = {
 		points: 0,
 		timeElapsed: 0,
 		rewinds: 0,
+		maxRewinds: 2,
+		isRewinding: false,
 		incrementPoints: function incrementPoints(points) {
 			this.points += points;
 			jw.hud.renderPoints(this.points);
 		},
 
 		incrementRewinds: function incrementRewinds() {
-			if (this.rewinds < maxRewinds)
+			if (this.rewinds < this.maxRewinds)
 				this.rewinds++;
 
 			this.canRewind = true;

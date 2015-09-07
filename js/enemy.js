@@ -11,7 +11,6 @@
 	var killedScore = 100;
 	var sprite = new Image();
 	var ctx = document.querySelector('#enemy').getContext('2d');
-	var isRewinding = false;
 	var decelerationRate = 0;
 
 	sprite.src = 'img/enemy.png';
@@ -44,7 +43,6 @@
 			},
 
 			onRewindStart: function onRewindStart() {
-				isRewinding = true;
 			},
 
 			onRewindFrame: function onRewindFrame(data) {
@@ -52,7 +50,6 @@
 			},
 
 			onPlay: function onPlay() {
-				isRewinding = false;
 				decelerationRate = 0;
 			}
 		};
@@ -62,10 +59,10 @@
 	}
 
 	function nextFrame() {
-		if (isRewinding && decelerationRate < speed * 2)
+		if (jw.game.isRewinding && decelerationRate < speed * 2)
 			decelerationRate += 0.2
 
-		if (!isRewinding && Date.now() - lastUpdate > Math.ceil(Math.random() * updateInterval)) {
+		if (!jw.game.isRewinding && Date.now() - lastUpdate > Math.ceil(Math.random() * updateInterval)) {
 			addEnemy();
 			lastUpdate = Date.now();
 		}
@@ -94,7 +91,7 @@
 
 			enemy.x -= speed - decelerationRate;
 
-			if (!isRewinding && (isLaserInitial || Date.now() - enemy.lastLaser > laserInterval)) {
+			if (!jw.game.isRewinding && (isLaserInitial || Date.now() - enemy.lastLaser > laserInterval)) {
 				jw.laser.addBeam({
 					x: enemy.x,
 					y: enemy.y + 15,

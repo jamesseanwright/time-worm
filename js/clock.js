@@ -14,7 +14,11 @@
 	sprite.src = 'img/clock.png';
 
 	function nextFrame() {
-		var shouldCreateClock = Date.now() - lastClock > clockInterval && !isClockPresent && jw.game.canRewind;
+		var shouldCreateClock = Date.now() - lastClock > clockInterval 
+			&& !jw.game.isRewinding 
+			&& !isClockPresent 
+			&& jw.game.rewinds < jw.game.maxRewinds;
+
 		var player;
 		var hasBeenCollected;
 
@@ -30,6 +34,7 @@
 
 			if (player) {
 				jw.game.incrementRewinds();
+				ctx.clearRect(x, y, spriteSize, spriteSize);
 				hasBeenCollected = true;
 			}
 
@@ -39,7 +44,8 @@
 
 		if (hasBeenCollected || x + spriteSize < 0) {
 			isClockPresent = hasBeenCollected = false;
-			ctx.clearRect(x, y, spriteSize, spriteSize);
+			x = 0;
+			y = Math.ceil(Math.random() * jw.gameHeight);
 			lastClock = Date.now();
 		}
 

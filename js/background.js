@@ -2,16 +2,13 @@
 	'use strict';
 	var ctx = document.querySelector('#background').getContext('2d');
 	var background = generateBackground();
-	var isRewinding = false;
 
 	jw.events.register('bg', background);
 
 	function onRewindStart() {
-		isRewinding = true;
 	}
 
 	function onPlay() {
-		isRewinding = false;
 	}
 
 	function nextFrame(timestamp) {
@@ -47,10 +44,10 @@
 		ctx.fillStyle = background.starFill;
 
 		background.stars.forEach(function (star) {
-			if (!isRewinding)
+			if (!jw.game.isRewinding)
 				star.decelerationRate = 0;
 
-			else if (isRewinding && star.decelerationRate < star.speed * 2)
+			else if (jw.game.isRewinding && star.decelerationRate < star.speed * 2)
 				star.decelerationRate += 0.5;
 
 			ctx.clearRect(star.x - star.decelerationRate, star.y - star.decelerationRate, star.size + star.decelerationRate, star.size + star.decelerationRate);
