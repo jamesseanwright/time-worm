@@ -32,6 +32,10 @@
 
 		gameOver: function gameOver() {
 			this.canRewind = false;
+
+			if (this.isRewinding)
+				jw.events.play();
+
 			jw.hud.renderGameOver();
 		}
 	};

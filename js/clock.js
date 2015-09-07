@@ -31,15 +31,14 @@
 		if (isClockPresent) {
 			ctx.clearRect(x, y, spriteSize, spriteSize);
 			player = jw.player.getByPosition(x, y, spriteSize, spriteSize);
+			x -= speed;
+			ctx.drawImage(sprite, x, y, spriteSize, spriteSize);
 
 			if (player) {
 				jw.game.incrementRewinds();
 				ctx.clearRect(x, y, spriteSize, spriteSize);
 				hasBeenCollected = true;
 			}
-
-			x -= speed;
-			ctx.drawImage(sprite, x, y, spriteSize, spriteSize);
 		}
 
 		if (hasBeenCollected || x + spriteSize < 0) {
