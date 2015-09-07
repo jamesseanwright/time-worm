@@ -27,6 +27,7 @@
 
 	function rewind(type) {
 		var startTime = Date.now();
+		jw.game.decrementRewinds();
 
 		Object.keys(registrations).forEach(function (type) {
 			registrations[type].onRewindStart();

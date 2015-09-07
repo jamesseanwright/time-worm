@@ -127,7 +127,6 @@
 	};
 
 	keyman.left.onUp = function () {
-		if (jw.game.canRewind)
 			jw.events.play();
 	};
 
