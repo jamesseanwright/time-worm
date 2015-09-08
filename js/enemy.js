@@ -83,6 +83,7 @@
 			/* so enemies that have left the screen can
 			 * subsequently be restored */
 			if (enemy.x + width < -64) {
+				console.log('enemy left screen');
 				jw.events.add('enemyDestroyed', {
 					x: -64,
 					y: enemy.y
