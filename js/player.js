@@ -5,8 +5,10 @@
 	var speed = 5;
 	var bounceVariant = 15;
 	var bounceSpeed = 1;
-	var x = 10;
-	var y = 50;
+	var initialX = 10;
+	var initialY = 50;
+	var x = initialX;
+	var y = initialY;
 	var health = 4;
 	var maxHealth = 4;
 
@@ -21,6 +23,14 @@
 
 	var chunks = generateChunks();
 	var width = spriteSize * chunks.length;
+
+	window.addEventListener('restartgame', function () {
+		x = initialX;
+		y = initialY;
+		health = maxHealth;
+		chunks = generateChunks();
+		width = spriteSize * chunks.length;
+	});
 
 	function onHit() {
 		if (--health === 0) {

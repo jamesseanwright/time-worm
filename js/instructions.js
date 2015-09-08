@@ -5,8 +5,8 @@
 	var player = document.querySelector('#player');
 	var ctx = canvas.getContext('2d');
 	var fontFamily = 'Courier New';
-	var titleFontSize = 28;
-	var mainFontSize = 22;
+	var titleFontSize = 26;
+	var mainFontSize = 20;
 	var rightMargin = 50;
 	var separator = 50;
 	var textStart = 160;
@@ -24,7 +24,7 @@
 		requestAnimationFrame(function () {
 			ctx.font = mainFontSize + 'px ' + fontFamily;
 			ctx.fillStyle = 'white';
-			ctx.fillText('You are the time worm! Your job is to destroy', rightMargin, textStart);
+			ctx.fillText('You are the Time Worm! Your job is to destroy', rightMargin, textStart);
 			ctx.fillText('as many little grey men as possible. Your health', rightMargin, textStart + mainFontSize);
 			ctx.fillText('is represented by the number of your body\'s,', rightMargin, textStart + mainFontSize * 2);
 			ctx.fillText('segments plus your head. The only way to restore', rightMargin, textStart + mainFontSize * 3 );
@@ -45,7 +45,7 @@
 			ctx.fillText('rewind, maximum 5 seconds)', rightMargin, controlsStart + titleFontSize * 5);
 		
 			ctx.font = titleFontSize + 'px ' + fontFamily;
-			ctx.fillText('Click to begin!', rightMargin, separator + controlsStart + titleFontSize * 6);
+			ctx.fillText('Click to begin!', jw.gameWidth - rightMargin - 300, controlsStart);
 
 		});
 	}

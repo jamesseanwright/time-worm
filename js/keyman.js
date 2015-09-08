@@ -6,7 +6,7 @@
 		down: { active: false, onDown: null, onUp: null },
 		left: { active: false, onDown: null, onUp: null },
 		right: { active: false, onDown: null, onUp: null },
-		space: { active: false, onDown: null, onUp: null, simultaneous: true } // SPACE
+		space: { active: false, onDown: null, onUp: null, simultaneous: true }
 	};
 
 	var codeMapping = {
@@ -17,10 +17,25 @@
 		32: 'space'
 	};
 
-	window.addEventListener('begingame', function () {
+	window.addEventListener('begingame', registerEvents);
+	window.addEventListener('restartgame', registerEvents);
+	window.addEventListener('gameover', onGameOver);
+
+	function registerEvents() {
 		window.addEventListener('keydown', handleKeyDown);
 		window.addEventListener('keyup', handleKeyUp);
-	});
+	}
+
+	function onGameOver() {
+		window.removeEventListener('keydown', handleKeyDown);
+		window.removeEventListener('keyup', handleKeyUp);
+
+		Object.keys(keyman).forEach(function (keyProp) {
+			var key = keyman[keyProp];
+			key.active = false;
+			key.onUp && key.onUp();
+		});
+	}
 
 	function handleKeyDown(e) {
 		var key = keyman[codeMapping[e.keyCode]];

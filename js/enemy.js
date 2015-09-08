@@ -19,6 +19,14 @@
 		getByPosition: getByPosition
 	};
 
+	window.addEventListener('restartgame', function () {
+		enemies = [];
+
+		requestAnimationFrame(function () {
+			ctx.clearRect(0, 0, jw.gameWidth, jw.gameHeight);
+		});
+	});
+
 	function getByPosition(x, y, sourceWidth, sourceHeight) {
 		return enemies.filter(function (enemy) {
 			return x + sourceWidth >= enemy.x

@@ -9,11 +9,14 @@
 	var subtitleFontSize = 28;
 	var fontFamily = 'Courier New';
 
-	window.addEventListener('load', function () {
+	window.addEventListener('begingame', drawClock);
+	window.addEventListener('restartgame', drawClock);
+
+	function drawClock() {
 		requestAnimationFrame(function () {
 			ctx.drawImage(jw.clock.sprite, (leftMargin + jw.gameWidth / 3) + 25, topMargin - 3, jw.clock.spriteSize, jw.clock.spriteSize);
 		});
-	});
+	}
 	
 	function renderPoints(points) {
 		requestAnimationFrame(function () {
@@ -43,12 +46,16 @@
 			ctx.fillText('Game Over!', jw.gameWidth / 3 + 30, jw.gameHeight / 2);
 
 			ctx.font = subtitleFontSize + 'px ' + fontFamily;
-			ctx.fillText('Click to replay!', jw.gameWidth / 3, jw.gameHeight / 2 + primaryFontSize);
+			ctx.fillText('Click to replay!', jw.gameWidth / 3 - 5, jw.gameHeight / 2 + primaryFontSize);
 		});
 
-		canvas.addEventListener('click', function () {
-			console.log('restart');
-		});
+		canvas.addEventListener('click', restartGame);
+	}
+
+	function restartGame() {
+		ctx.clearRect(0, 0, jw.gameWidth, jw.gameHeight);
+		jw.game.restart();
+		canvas.removeEventListener('click', restartGame);
 	}
 
 	jw.hud = {

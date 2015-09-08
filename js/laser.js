@@ -10,6 +10,14 @@
 		addBeam: addBeam
 	};
 
+	window.addEventListener('restartgame', function () {
+		requestAnimationFrame(function () {
+			ctx.clearRect(0, 0, jw.gameWidth, jw.gameHeight);
+		});
+
+		beams = [];
+	});
+
 	function addBeam(beam) {
 		beams.push(beam);
 	}

@@ -5,7 +5,7 @@
 	window.jw = {
 		// commonly-used globals
 		gameWidth: 800,
-		gameHeight: 600
+		gameHeight: 480
 	};
 
 	window.addEventListener('load', function () {
@@ -16,7 +16,7 @@
 			canvasElements[i].height = jw.gameHeight;
 		}
 
-		jw.game.incrementPoints(0);
-		jw.game.incrementRewinds();
+		jw.game.resetPoints();
+		jw.game.resetRewinds();
 	});
 }());
