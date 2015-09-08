@@ -37,8 +37,6 @@
 	}
 
 	function nextFrame() {
-		console.log('nextFrame');
-
 		beams = beams.filter(function (beam) {
 			return (beam.x + width > 0) && beam.x <= jw.gameWidth && !beam.hasHit;
 		});
@@ -54,10 +52,11 @@
 				target.onHit();
 				beam.hasHit = true;
 			} else {
-				if (jw.game.isRewinding && beam.decelerationRate < beam.speed * 2)
-					beam.decelerationRate += 0.2;
+				// this is on unidirectional :( applies to enemyLasers only
+				if (jw.game.isRewinding && beam.isRewindable && beam.decelerationRate < Math.abs(beam.speed * 2))
+					beam.decelerationRate += 0.6;
 
-				beam.x += beam.speed - beam.decelerationRate;
+				beam.x += beam.speed + beam.decelerationRate;
 
 				ctx.fillStyle = 'yellow';
 				ctx.fillRect(beam.x, beam.y, width, height);

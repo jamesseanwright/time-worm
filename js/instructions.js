@@ -13,7 +13,6 @@
 	var controlsStart;
 
 	canvas.addEventListener('click', function () {	
-		console.log(' bdrgh');
 		jw.game.begin();
 		canvas.style.display = 'none';
 	});

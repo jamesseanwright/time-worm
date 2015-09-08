@@ -68,7 +68,7 @@
 
 	function nextFrame() {
 		if (jw.game.isRewinding && decelerationRate < speed * 2)
-			decelerationRate += 0.2
+			decelerationRate += 0.4
 
 		if (!jw.game.isRewinding && Date.now() - lastUpdate > Math.ceil(Math.random() * updateInterval)) {
 			addEnemy();
@@ -104,7 +104,8 @@
 					x: enemy.x,
 					y: enemy.y + 15,
 					speed: -15,
-					target: 'player'
+					target: 'player',
+					isRewindable: true
 				});
 
 				enemy.lastLaser = Date.now();
