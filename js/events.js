@@ -19,10 +19,6 @@
 		registrations[type] = ref;
 	}
 
-	function registerMultiple(type, ref) {
-		registrations[type] = registrations[type] && registrations[type].length ? registrations[type].concat(ref) : [ref];
-	}
-
 	function add(type, data) {
 		invalidate();
 
@@ -63,7 +59,6 @@
 	jw.events = {
 		add: add,
 		register: register,
-		registerMultiple: registerMultiple,
 		rewind: rewind,
 		play: play,
 		trackingThreshold: trackingThreshold

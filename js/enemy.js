@@ -18,6 +18,7 @@
 
 	var enemy = {
 		getByPosition: getByPosition,
+		onRewindFrame: onRewindFrame,
 		onPlay: onPlay
 	};
 
@@ -28,6 +29,12 @@
 			ctx.clearRect(0, 0, jw.gameWidth, jw.gameHeight);
 		});
 	});
+
+	function onRewindFrame(evt) {
+		if (evt.type === 'enemyLeftScreen') {
+			addEnemy(evt.data.x, evt.data.y);
+		}
+	}
 
 	function getByPosition(x, y, sourceWidth, sourceHeight) {
 		return enemies.filter(function (enemy) {
@@ -40,8 +47,8 @@
 
 	function addEnemy(x, y) {
 		var newEnemy = {
-			x: jw.gameWidth + width,
-			y: Math.ceil(Math.random() * jw.gameHeight),
+			x: x || jw.gameWidth + width,
+			y: y || Math.ceil(Math.random() * jw.gameHeight),
 
 			onHit: function onHit() {
 				this.dead = true;
@@ -50,18 +57,10 @@
 					x: enemy.x,
 					y: enemy.y
 				});
-			},
-
-			onRewindStart: function onRewindStart() {
-			},
-
-			onRewindFrame: function onRewindFrame(evt) {
-				addEnemy(evt.data.x, evt.data.y);
 			}
 		};
 
 		enemies.push(newEnemy);
-		jw.events.registerMultiple('enemyDestroyed', newEnemy);
 	}
 
 	function nextFrame() {
@@ -80,15 +79,15 @@
 
 			/* so enemies that have left the screen can
 			 * subsequently be restored */
-			if (enemy.x + width < -64) {
-				console.log('enemy left screen');
-				jw.events.add('enemyDestroyed', {
-					x: -64,
+
+			if (enemy.x + width < -(width)) {
+				jw.events.add('enemyLeftScreen', {
+					x: -(width),
 					y: enemy.y
 				});
 			}
 
-			return !enemy.dead && enemy.x + width > 0;
+			return !enemy.dead && enemy.x + width > -1 - width;
 		});
 
 		enemies.forEach(function (enemy) {
@@ -122,7 +121,6 @@
 
 		setTimeout(function () {
 			amnesty = 0;
-			console.log(amnesty);
 		}, amnesty);
 	}
 
@@ -131,6 +129,8 @@
 	});
 
 	jw.events.register('enemyAmnesty', enemy);
+	jw.events.register('enemyDestroyed', enemy);
+	jw.events.register('enemyLeftScreen', enemy);
 
 	jw.enemy = enemy;
 }());
