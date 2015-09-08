@@ -31,11 +31,14 @@
 		jw.game.decrementRewinds();
 
 		Object.keys(registrations).forEach(function (type) {
-			registrations[type].onRewindStart();
+			registrations[type].onRewindStart && registrations[type].onRewindStart();
 		});
 
 		events.forEach(function (evt) {
-			setTimeout(registrations[evt.type].onRewindFrame.bind(registrations[type], evt.data), startTime - evt.time);
+			var ref = registrations[evt.type];
+
+			if (ref.onRewindFrame)
+				setTimeout(registrations[evt.type].onRewindFrame.bind(registrations[type], evt.data), startTime - evt.time);
 		});
 
 		setTimeout(play, trackingThreshold);
@@ -45,7 +48,7 @@
 		jw.game.isRewinding = false;
 
 		Object.keys(registrations).forEach(function (type) {
-			registrations[type].onPlay();
+			registrations[type].onPlay && registrations[type].onPlay();
 		});
 	}
 
