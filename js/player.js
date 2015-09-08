@@ -16,6 +16,8 @@
 	var bodySprite = new Image();
 	var headSprite = new Image();
 	var interval;
+	var isAutoPilot = false;
+	var targetY;
 	var ctx = document.querySelector('#player').getContext('2d');
 
 	bodySprite.src = 'img/body.png';
@@ -75,15 +77,21 @@
 		ctx.clearRect(x, y, width, spriteSize);
 	}
 
-	function onRewindFrame(data) {
-		if (health < maxHealth) {
-			health++;
-			chunks = generateChunks();
+	function onRewindFrame(evt) {
+		if (evt.type === 'playerHit') {
+			if (health < maxHealth) {
+				health++;
+				chunks = generateChunks();
+			}
+		} else if (evt.type === 'playerMove') {
+			isAutoPilot = true;
+			targetY = evt.data.y;
 		}
 	}
 
 	function onPlay() {
-
+		isAutoPilot = false;
+		targetY = null;
 	}
 
 	function nextFrame() {
@@ -92,6 +100,14 @@
 
 			updateChunkBounce(chunk, i);
 			ctx.drawImage(chunk.sprite, x + spriteSize * i, y - chunk.yOffset, spriteSize, spriteSize);
+		}
+
+		if (isAutoPilot && y !== targetY)
+			y = y > targetY ? y - speed : y + speed
+
+		else if (isAutoPilot && y === targetY) {
+			isAutoPilot = false;
+			targetY = null;
 		}
 
 		requestAnimationFrame(nextFrame);
@@ -116,18 +132,28 @@
 	});
 
 	keyman.up.onDown = function () {
+		if (isAutoPilot)
+			return;
+
 		interval = setInterval(function () {
 			y -= speed;
 		}, 20);
 	};
 
 	keyman.down.onDown = function () {
+		if (isAutoPilot)
+			return;
+
 		interval = setInterval(function () {
 			y += speed;
 		}, 20);
 	};
 
 	keyman.up.onUp = keyman.down.onUp = function () {
+		jw.events.add('playerMove', {
+			y: y
+		});
+
 		clearInterval(interval);
 	};
 
@@ -158,4 +184,5 @@
 	};
 
 	jw.events.register('playerHit', jw.player);
+	jw.events.register('playerMove', jw.player);
 }());

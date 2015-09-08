@@ -38,7 +38,7 @@
 			var ref = registrations[evt.type];
 
 			if (ref.onRewindFrame)
-				setTimeout(registrations[evt.type].onRewindFrame.bind(registrations[type], evt.data), startTime - evt.time);
+				setTimeout(registrations[evt.type].onRewindFrame.bind(registrations[type], evt), startTime - evt.time);
 		});
 
 		setTimeout(play, trackingThreshold);

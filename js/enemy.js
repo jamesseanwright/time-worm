@@ -53,8 +53,8 @@
 			onRewindStart: function onRewindStart() {
 			},
 
-			onRewindFrame: function onRewindFrame(data) {
-				addEnemy(data.x, data.y);
+			onRewindFrame: function onRewindFrame(evt) {
+				addEnemy(evt.data.x, evt.data.y);
 			},
 
 			onPlay: function onPlay() {
