@@ -5,6 +5,10 @@
 	var events = [];
 	var registrations = {};
 
+	window.addEventListener('restartgame', function () {
+		events = [];
+	});
+
 	function invalidate() {
 		events = events.filter(function (evt) {
 			return Date.now() - evt.time <= trackingThreshold;
