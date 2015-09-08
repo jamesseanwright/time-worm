@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>js13k</title> 
+		<title>Time Worm!</title> 
 	</head>
-	<body style="background: black; overflow: hidden; position: relative;">
-		<canvas style="position: absolute;" id="background"></canvas>
-		<canvas style="position: absolute;" id="title"></canvas>
-		<canvas style="display: none; position: absolute;" id="instructions"></canvas>
-		<canvas style="display: none; position: absolute;" id="clocks"></canvas>
-		<canvas style="display: none; position: absolute;" id="enemy"></canvas>
-		<canvas style="display: none; position: absolute;" id="player"></canvas>
-		<canvas style="display: none; position: absolute;" id="laser"></canvas>
-		<canvas style="display: none; position: absolute;" id="hud"></canvas>
+	<style>canvas{position: absolute;}.game-canvas{display:none;}</style>
+	<body>
+		<article style="position:relative;margin:0 auto;">
+			<canvas style="background: black" id="background"></canvas>
+			<canvas id="clocks" class="game-canvas"></canvas>
+			<canvas id="enemy" class="game-canvas"></canvas>
+			<canvas id="player" class="game-canvas"></canvas>
+			<canvas id="laser" class="game-canvas"></canvas>
+			<canvas id="hud" class="game-canvas"></canvas>
+			<canvas id="title"></canvas>
+			<canvas style="display: none;" id="instructions"></canvas>
 
-		<script src="js/init.js"></script>
-		<script src="js/title.js"></script>
-		<script src="js/instructions.js"></script>
-		<script src="js/game.js"></script>
-		<script src="js/clock.js"></script>
-		<script src="js/hud.js"></script>
-		<script src="js/keyman.js"></script>
-		<script src="js/events.js"></script>
-		<script src="js/background.js"></script>
-		<script src="js/laser.js"></script>
-		<script src="js/enemy.js"></script>
-		<script src="js/player.js"></script>
+			<script src="js/init.js"></script>
+			<script src="js/title.js"></script>
+			<script src="js/instructions.js"></script>
+			<script src="js/game.js"></script>
+			<script src="js/clock.js"></script>
+			<script src="js/hud.js"></script>
+			<script src="js/keyman.js"></script>
+			<script src="js/events.js"></script>
+			<script src="js/background.js"></script>
+			<script src="js/laser.js"></script>
+			<script src="js/enemy.js"></script>
+			<script src="js/player.js"></script>
+		</article>
 	</body>
 </html>

@@ -108,7 +108,7 @@
 		requestAnimationFrame(nextFrame);
 	}
 
-	window.addEventListener('load', function () {
+	window.addEventListener('begingame', function () {
 		requestAnimationFrame(nextFrame);
 	});
 

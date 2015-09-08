@@ -1,6 +1,8 @@
 (function () {
 	'use strict';
 
+	var beginEvent = new Event('begingame');
+
 	jw.game = {
 		points: 0,
 		timeElapsed: 0,
@@ -37,6 +39,15 @@
 				jw.events.play();
 
 			jw.hud.renderGameOver();
+		},
+
+		begin: function begin() {
+			var gameCanvases = document.querySelectorAll('.game-canvas');
+
+			for (var i = 0; i < gameCanvases.length; i++)
+				gameCanvases[i].style.display = 'block';
+
+			window.dispatchEvent(beginEvent);
 		}
 	};
 }());

@@ -12,13 +12,19 @@
 	var textStart = 160;
 	var controlsStart;
 
+	canvas.addEventListener('click', function () {	
+		console.log(' bdrgh');
+		jw.game.begin();
+		canvas.style.display = 'none';
+	});
+
 	function render() {
 		player.style.display = 'block';
 
 		requestAnimationFrame(function () {
 			ctx.font = mainFontSize + 'px ' + fontFamily;
 			ctx.fillStyle = 'white';
-			ctx.fillText('You are the time worm. Your job is to destroy', rightMargin, textStart);
+			ctx.fillText('You are the time worm! Your job is to destroy', rightMargin, textStart);
 			ctx.fillText('as many little grey men as possible. Your health', rightMargin, textStart + mainFontSize);
 			ctx.fillText('is represented by the number of your body\'s,', rightMargin, textStart + mainFontSize * 2);
 			ctx.fillText('segments plus your head. The only way to restore', rightMargin, textStart + mainFontSize * 3 );

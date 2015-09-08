@@ -51,7 +51,9 @@
 		requestAnimationFrame(nextFrame);
 	}
 
-	requestAnimationFrame(nextFrame);
+	window.addEventListener('begingame', function () {
+		requestAnimationFrame(nextFrame);
+	});
 
 	jw.clock = {
 		sprite: sprite, // image resource shared with HUD

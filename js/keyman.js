@@ -17,8 +17,10 @@
 		32: 'space'
 	};
 
-	window.addEventListener('keydown', handleKeyDown);
-	window.addEventListener('keyup', handleKeyUp);
+	window.addEventListener('begingame', function () {
+		window.addEventListener('keydown', handleKeyDown);
+		window.addEventListener('keyup', handleKeyUp);
+	});
 
 	function handleKeyDown(e) {
 		var key = keyman[codeMapping[e.keyCode]];

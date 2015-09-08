@@ -1,7 +1,8 @@
 (function () {
 	'use strict';
 
-	var ctx = document.querySelector('#hud').getContext('2d');
+	var canvas = document.querySelector('#hud');
+	var ctx = canvas.getContext('2d');
 	var topMargin = 25;
 	var leftMargin = 50;
 	var primaryFontSize = 32;
@@ -39,7 +40,14 @@
 
 			ctx.fillStyle = 'white';
 			ctx.font = primaryFontSize + 'px ' + fontFamily;
-			ctx.fillText('Game Over!', jw.gameWidth / 3, jw.gameHeight / 2);
+			ctx.fillText('Game Over!', jw.gameWidth / 3 + 30, jw.gameHeight / 2);
+
+			ctx.font = subtitleFontSize + 'px ' + fontFamily;
+			ctx.fillText('Click to replay!', jw.gameWidth / 3, jw.gameHeight / 2 + primaryFontSize);
+		});
+
+		canvas.addEventListener('click', function () {
+			console.log('restart');
 		});
 	}
 
