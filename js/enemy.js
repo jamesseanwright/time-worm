@@ -4,6 +4,7 @@
 	var lastUpdate = Date.now();
 	var updateInterval = 10000;
 	var laserInterval = 3000;
+	var amnesty = 0;
 	var enemies = [];
 	var width = 60;
 	var height = 32;
@@ -16,7 +17,8 @@
 	sprite.src = 'img/enemy.png';
 
 	var enemy = {
-		getByPosition: getByPosition
+		getByPosition: getByPosition,
+		onPlay: onPlay
 	};
 
 	window.addEventListener('restartgame', function () {
@@ -55,22 +57,18 @@
 
 			onRewindFrame: function onRewindFrame(evt) {
 				addEnemy(evt.data.x, evt.data.y);
-			},
-
-			onPlay: function onPlay() {
-				decelerationRate = 0;
 			}
 		};
 
 		enemies.push(newEnemy);
-		jw.events.register('enemyDestroyed', newEnemy);
+		jw.events.registerMultiple('enemyDestroyed', newEnemy);
 	}
 
 	function nextFrame() {
 		if (jw.game.isRewinding && decelerationRate < speed * 2)
 			decelerationRate += 0.4
 
-		if (!jw.game.isRewinding && Date.now() - lastUpdate > Math.ceil(Math.random() * updateInterval)) {
+		if (!jw.game.isRewinding && Date.now() - lastUpdate > Math.ceil(Math.random() * updateInterval) + amnesty) {
 			addEnemy();
 			lastUpdate = Date.now();
 		}
@@ -118,9 +116,21 @@
 		requestAnimationFrame(nextFrame);
 	}
 
+	function onPlay() {
+		amnesty = jw.events.trackingThreshold; // so no more enemies are added until caught up with the present
+		decelerationRate = 0;
+
+		setTimeout(function () {
+			amnesty = 0;
+			console.log(amnesty);
+		}, amnesty);
+	}
+
 	window.addEventListener('begingame', function () {
 		requestAnimationFrame(nextFrame);
 	});
+
+	jw.events.register('enemyAmnesty', enemy);
 
 	jw.enemy = enemy;
 }());
