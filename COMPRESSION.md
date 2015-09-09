@@ -1,5 +1,5 @@
 # Compression Report
-
-Wed Sep  9 22:07:09 BST 2015
-Zipped size: 12477
-Maximum allowed size: 13312
+\n
+Wed Sep  9 22:29:24 BST 2015
+\nZipped size: 12477
+\nMaximum allowed size: 13312
