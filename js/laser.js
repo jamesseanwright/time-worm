@@ -47,18 +47,19 @@
 		beams.forEach(function (beam) {
 			var target;
 
-			ctx.clearRect(beam.x, beam.y, width, height);
+			ctx.clearRect(beam.x - beam.speed - beam.decelerationRate, beam.y, width + beam.speed + beam.decelerationRate, height);
 
 			target = jw[beam.target].getByPosition(beam.x, beam.y, width, height);
 
 			if (target) {
 				target.onHit();
 				beam.hasHit = true;
+				ctx.clearRect(beam.x, beam.y, width, height);
 				jw.sounds.play('explosion');
 			} else {
 				// this is on unidirectional :( applies to enemyLasers only
 				if (jw.game.isRewinding && beam.isRewindable && beam.decelerationRate < Math.abs(beam.speed * 2))
-					beam.decelerationRate += 0.6;
+					beam.decelerationRate += 0.8;
 
 				beam.x += beam.speed + beam.decelerationRate;
 

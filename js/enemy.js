@@ -101,9 +101,7 @@
 
 		enemies.forEach(function (enemy) {
 			var isLaserInitial = (!enemy.lastLaser && enemy.x + width <= jw.gameWidth);
-
 			ctx.clearRect(enemy.x - speed - decelerationRate, enemy.y, width + speed + decelerationRate, height);
-
 			enemy.x -= speed - decelerationRate;
 
 			if (!jw.game.isRewinding && (isLaserInitial || Date.now() - enemy.lastLaser > laserInterval)) {

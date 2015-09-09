@@ -26,6 +26,11 @@
 	var chunks = generateChunks();
 	var width = spriteSize * chunks.length;
 
+	// gnarly rendering glitch hack :()
+	window.addEventListener('gameover', function () {
+		ctx.clearRect(0, 0, jw.gameWidth, jw.gameHeight);
+	});
+
 	window.addEventListener('restartgame', function () {
 		x = initialX;
 		y = initialY;
@@ -101,7 +106,7 @@
 			var chunk = chunks[i - 1];
 
 			updateChunkBounce(chunk, i);
-			ctx.drawImage(chunk.sprite, x + spriteSize * i, y - chunk.yOffset, spriteSize, spriteSize);
+			ctx.drawImage(chunk.sprite, x + spriteSize * i, y - chunk.yOffset - speed, spriteSize, spriteSize + speed);
 		}
 
 		if (isAutoPilot && y !== targetY)
