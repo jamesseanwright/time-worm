@@ -16,10 +16,10 @@ You are the Time Worm! Your job is to destroy as many little grey men as possibl
 Because I'm lazy, I'll link to Time Worm!'s submission page when it's accepted.
 
 ## Controls
-Up - Move up  
-Down - Move down  
-Space - Fire  
-Left - Rewind time for 5 seconds  
+* Up - Move up
+* Down - Move down
+* Space - Fire
+*Left - Rewind time for 5 seconds
 
 ## Credits
 Everything was done by myself except for the sound effects, which are:
