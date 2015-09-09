@@ -26,14 +26,17 @@
 	}
 
 	function addBeam(beam) {
+		if (jw.game.isRewinding)
+			return;
+
 		jw.events.add('beamAdded', {
 			x: beam.x,
 			y: beam.y
 		});
 
 		beam.decelerationRate = 0;
-
 		beams.push(beam);
+		jw.sounds.play('fire');
 	}
 
 	function nextFrame() {
@@ -51,6 +54,7 @@
 			if (target) {
 				target.onHit();
 				beam.hasHit = true;
+				jw.sounds.play('explosion');
 			} else {
 				// this is on unidirectional :( applies to enemyLasers only
 				if (jw.game.isRewinding && beam.isRewindable && beam.decelerationRate < Math.abs(beam.speed * 2))

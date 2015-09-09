@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# due to declarative nature of code, scripts
-# must be compiled in this order :( :(
-
 SIZE_LIMIT=13312
 
 if [ -e dist ]
@@ -19,9 +16,12 @@ fi
 mkdir dist
 mkdir dist/js
 
-uglifyjs js/{init,title,instructions,game,clock,hud,keyman,events,background,laser,enemy,player}.js > dist/js/time-worm.min.js
+# due to declarative nature of code, scripts
+# must be compiled in this order :( :(
+uglifyjs js/{init,title,instructions,game,clock,hud,keyman,events,background,sounds,laser,enemy,player}.js > dist/js/time-worm.min.js
 cp index.html dist/
 cp -R img/ dist/img/
+cp -R sounds/ dist/sounds/
 
 echo "Distributable output to dist dir. Creating archive..."
 zip -r time-worm dist

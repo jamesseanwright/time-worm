@@ -33,6 +33,7 @@
 		var startTime = Date.now();
 		jw.game.isRewinding = true;
 		jw.game.decrementRewinds();
+		jw.sounds.play('rewind');
 
 		Object.keys(registrations).forEach(function (type) {
 			registrations[type].onRewindStart && registrations[type].onRewindStart();

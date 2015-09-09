@@ -38,6 +38,7 @@
 				jw.game.incrementRewinds();
 				ctx.clearRect(x, y, spriteSize, spriteSize);
 				hasBeenCollected = true;
+				jw.sounds.play('collect');
 			}
 		}
 
