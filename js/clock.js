@@ -11,7 +11,7 @@
 	var x;
 	var y;
 
-	sprite.src = 'img/clock.png';
+	sprite.src = 'clock.png';
 
 	function nextFrame() {
 		var shouldCreateClock = Date.now() - lastClock > clockInterval 

@@ -20,16 +20,11 @@
 	var targetY;
 	var ctx = document.querySelector('#player').getContext('2d');
 
-	bodySprite.src = 'img/body.png';
-	headSprite.src = 'img/head.png';
+	bodySprite.src = 'body.png';
+	headSprite.src = 'head.png';
 
 	var chunks = generateChunks();
 	var width = spriteSize * chunks.length;
-
-	// gnarly rendering glitch hack :()
-	window.addEventListener('gameover', function () {
-		ctx.clearRect(0, 0, jw.gameWidth, jw.gameHeight);
-	});
 
 	window.addEventListener('restartgame', function () {
 		x = initialX;
@@ -44,7 +39,8 @@
 			jw.game.gameOver();
 		}
 
-		ctx.clearRect(x + spriteSize, y - bounceVariant, width, spriteSize + bounceVariant * 2);
+		// gnarly rendering bug hack :(
+		ctx.clearRect(0, 0, jw.gameWidth, jw.gameHeight);
 
 		chunks = generateChunks();
 		width = spriteSize * chunks.length;
@@ -109,8 +105,10 @@
 			ctx.drawImage(chunk.sprite, x + spriteSize * i, y - chunk.yOffset - speed, spriteSize, spriteSize + speed);
 		}
 
-		if (isAutoPilot && y !== targetY)
+		if (isAutoPilot && y !== targetY) {
+			ctx.clearRect(x + spriteSize * i, y - chunk.yOffset - bounceVariant, spriteSize, spriteSize + bounceVariant * 2);
 			y = y > targetY ? y - speed : y + speed
+		}
 
 		else if (isAutoPilot && y === targetY) {
 			isAutoPilot = false;
@@ -139,7 +137,7 @@
 	});
 
 	keyman.up.onDown = function () {
-		if (isAutoPilot)
+		if (jw.game.isRewinding)
 			return;
 
 		interval = setInterval(function () {
@@ -148,7 +146,7 @@
 	};
 
 	keyman.down.onDown = function () {
-		if (isAutoPilot)
+		if (jw.game.isRewinding)
 			return;
 
 		interval = setInterval(function () {

@@ -14,16 +14,15 @@ fi
 
 
 mkdir dist
-mkdir dist/js
 
 # due to declarative nature of code, scripts
 # must be compiled in this order :( :(
-uglifyjs js/{init,title,instructions,game,clock,hud,keyman,events,background,sounds,laser,enemy,player}.js > dist/js/time-worm.min.js
+uglifyjs --screw-ie8 --mangle --reserved jw js/{init,title,instructions,game,clock,hud,keyman,events,background,sounds,laser,enemy,player}.js > dist/time-worm.min.js
 cp index.html dist/
-cp -R img/ dist/img/
-cp -R sounds/ dist/sounds/
+cp -R img/* dist
+cp -R sounds/* dist
 
 echo "Distributable output to dist dir. Creating archive..."
-zip -r time-worm dist
+zip -9 -j -D -X -r time-worm dist/*
 SIZE=$(stat -c%s time-worm.zip)
 echo "Created time-worm.zip. Compressed size is $SIZE. The max allowed by the rules is $SIZE_LIMIT."

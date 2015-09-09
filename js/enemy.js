@@ -14,7 +14,7 @@
 	var ctx = document.querySelector('#enemy').getContext('2d');
 	var decelerationRate = 0;
 
-	sprite.src = 'img/enemy.png';
+	sprite.src = 'enemy.png';
 
 	var enemy = {
 		getByPosition: getByPosition,
