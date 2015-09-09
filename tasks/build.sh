@@ -1,6 +1,7 @@
 #!/bin/bash
 
 SIZE_LIMIT=13312
+COMPRESSION_REPORT=COMPRESSION.md
 
 if [ -e dist ]
 then
@@ -10,6 +11,11 @@ fi
 if [ -e time-worm.zip ]
 then
 	rm time-worm.zip
+fi
+
+if [ -e $COMPRESSION_REPORT ]
+then
+	rm $COMPRESSION_REPORT
 fi
 
 
@@ -26,3 +32,11 @@ echo "Distributable output to dist dir. Creating archive..."
 zip -9 -j -D -X -r time-worm dist/*
 SIZE=$(stat -c%s time-worm.zip)
 echo "Created time-worm.zip. Compressed size is $SIZE. The max allowed by the rules is $SIZE_LIMIT."
+echo "Writing compression report..."
+touch $COMPRESSION_REPORT
+echo "# Compression Report" >> $COMPRESSION_REPORT
+echo "" >> $COMPRESSION_REPORT
+date >> $COMPRESSION_REPORT
+echo "Zipped size: $SIZE" >> $COMPRESSION_REPORT
+echo "Maximum allowed size: $SIZE_LIMIT" >> $COMPRESSION_REPORT
+echo "Done! Written to $COMPRESSION_REPORT"
