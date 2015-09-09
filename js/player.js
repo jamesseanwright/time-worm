@@ -53,8 +53,8 @@
 	function getByPosition(sourceX, sourceY, sourceWidth, sourceHeight) {
 		var isHit = sourceX + sourceWidth >= x
 				&& sourceX <= x + width
-				&& sourceY >= y
-				&& sourceY + sourceHeight <= y + spriteSize;
+				&& sourceY >= y - bounceVariant
+				&& sourceY + sourceHeight <= y + spriteSize + bounceVariant;
 
 		return isHit ? this : null;
 	}
@@ -74,6 +74,7 @@
 	}
 
 	function onRewindStart() {
+		isAutoPilot = true;
 		ctx.clearRect(x, y, width, spriteSize);
 	}
 
@@ -82,6 +83,7 @@
 			if (health < maxHealth) {
 				health++;
 				chunks = generateChunks();
+				width = spriteSize * chunks.length;
 			}
 		} else if (evt.type === 'playerMove') {
 			isAutoPilot = true;
@@ -160,10 +162,6 @@
 	keyman.left.onDown = function () {
 		if (jw.game.canRewind)
 			jw.events.rewind();
-	};
-
-	keyman.left.onUp = function () {
-			jw.events.play();
 	};
 
 	keyman.space.onDown = function () {

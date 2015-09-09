@@ -40,8 +40,7 @@
 			ctx.fillText('Up - Move up', rightMargin, controlsStart + titleFontSize);
 			ctx.fillText('Down - Move down', rightMargin, controlsStart + titleFontSize * 2);
 			ctx.fillText('Space - Fire', rightMargin, controlsStart + titleFontSize * 3);
-			ctx.fillText('Left - Rewind time (press and hold for longer', rightMargin, controlsStart + titleFontSize * 4);
-			ctx.fillText('rewind, maximum 5 seconds)', rightMargin, controlsStart + titleFontSize * 5);
+			ctx.fillText('Left - Rewind time for 5 seconds', rightMargin, controlsStart + titleFontSize * 4);
 		
 			ctx.font = titleFontSize + 'px ' + fontFamily;
 			ctx.fillText('Click to begin!', jw.gameWidth - rightMargin - 300, controlsStart);

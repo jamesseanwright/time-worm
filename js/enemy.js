@@ -36,6 +36,15 @@
 		}
 	}
 
+	function onPlay() {
+		amnesty = jw.events.trackingThreshold; // so no more enemies are added until caught up with the present
+		decelerationRate = 0;
+
+		setTimeout(function () {
+			amnesty = 0;
+		}, amnesty);
+	}
+
 	function getByPosition(x, y, sourceWidth, sourceHeight) {
 		return enemies.filter(function (enemy) {
 			return x + sourceWidth >= enemy.x
@@ -93,7 +102,7 @@
 		enemies.forEach(function (enemy) {
 			var isLaserInitial = (!enemy.lastLaser && enemy.x + width <= jw.gameWidth);
 
-			ctx.clearRect(enemy.x, enemy.y, width, height);
+			ctx.clearRect(enemy.x - speed - decelerationRate, enemy.y, width + speed + decelerationRate, height);
 
 			enemy.x -= speed - decelerationRate;
 
@@ -113,15 +122,6 @@
 		});
 
 		requestAnimationFrame(nextFrame);
-	}
-
-	function onPlay() {
-		amnesty = jw.events.trackingThreshold; // so no more enemies are added until caught up with the present
-		decelerationRate = 0;
-
-		setTimeout(function () {
-			amnesty = 0;
-		}, amnesty);
 	}
 
 	window.addEventListener('begingame', function () {

@@ -50,7 +50,7 @@
 			else if (jw.game.isRewinding && star.decelerationRate < star.speed * 2)
 				star.decelerationRate += 0.5;
 
-			ctx.clearRect(star.x - star.decelerationRate, star.y - star.decelerationRate, star.size + star.decelerationRate, star.size + star.decelerationRate);
+			ctx.clearRect(star.x - star.speed - star.decelerationRate, star.y - star.decelerationRate, star.size + star.decelerationRate + star.speed, star.size + star.decelerationRate);
 
 			star.x -= star.speed - star.decelerationRate;
 
