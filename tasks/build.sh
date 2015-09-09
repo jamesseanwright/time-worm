@@ -35,8 +35,8 @@ echo "Created time-worm.zip. Compressed size is $SIZE. The max allowed by the ru
 echo "Writing compression report..."
 touch $COMPRESSION_REPORT
 echo "# Compression Report" >> $COMPRESSION_REPORT
-echo "\n" >> $COMPRESSION_REPORT
+echo "" >> $COMPRESSION_REPORT
 date >> $COMPRESSION_REPORT
-echo "\nZipped size: $SIZE" >> $COMPRESSION_REPORT
-echo "\nMaximum allowed size: $SIZE_LIMIT" >> $COMPRESSION_REPORT
+echo "<br />Zipped size: $SIZE" >> $COMPRESSION_REPORT
+echo "<br />Maximum allowed size: $SIZE_LIMIT" >> $COMPRESSION_REPORT
 echo "Done! Written to $COMPRESSION_REPORT"
