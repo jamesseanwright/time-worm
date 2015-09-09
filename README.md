@@ -6,7 +6,7 @@ You are the Time Worm! Your job is to destroy as many little grey men as possibl
 ## Browser Support
 
 * Latest Chrome
-* Latest Firefox
+* Latest Firefox (sound not working on Debian/Ubuntu? Try installing [gstreamer1.0-libav](https://packages.debian.org/search?keywords=gstreamer1.0-libav) and then restart the browser)
 * Potentially Safari (untested)
 
 ## Play Online
