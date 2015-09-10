@@ -7,13 +7,12 @@ My entry for [JS13kGames 2015](http://js13kgames.com/). Written using JavaScript
 You are the Time Worm! Your job is to destroy as many little grey men as possible. Your health is represented by the number of your body's segments, plus your head. There are no health pickups here, but if you get hit or make another mistake you can rewind time for 5 seconds and try again! Plus there's the traditional option of firing right back with your laser-firing sunglasses!
 
 ## Browser Support
-
 * Latest Chrome
 * Latest Firefox (sound not working on Debian/Ubuntu? Try installing [gstreamer1.0-libav](https://packages.debian.org/search?keywords=gstreamer1.0-libav) and then restart the browser)
 * Potentially Safari (untested)
 
 ## Play Online
-Because I'm lazy, I'll link to Time Worm!'s submission page when it's accepted.
+Check out Time Worm!'s [entry page](http://js13kgames.com/entries/time-worm) on the JS13kGames website.
 
 ## Controls
 * Up - Move up
