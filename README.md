@@ -35,3 +35,6 @@ All of these effects are licensed under either the Creative Commons Attribution 
 
 ## Running Locally
 The project is dependent upon [UglifyJS](https://github.com/mishoo/UglifyJS2) and [zip](http://linux.die.net/man/1/zip) for Unix (this might be present in Cygwin or MinGW for Windows users, but I'm not certain). Clone the repository and simply run `./tasks/build.sh` to compile. A runnable version will be output to /dist, and a ZIP file will also be generated.
+
+## Reflection
+I wrote a [blog entry](http://jamesswright.co.uk/blog/1442177-time-worm-js13kgames-entry) summarising my experiences when developing this game and how I will improve going forward.
