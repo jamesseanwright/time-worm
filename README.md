@@ -42,12 +42,12 @@ I wrote a [blog entry](http://jamesswright.co.uk/blog/1442177-time-worm-js13kgam
 ## Judges' Feedback
 > Nice parallax effect, an interesting way to show how you lose a life, cool sounds.
 
-- Ewa Mazur
+-Ewa Mazur
 
 > Very creative, fun, could do with more polish.
 
-- Pablo Navarro
+-Pablo Navarro
 
 > Funny I can actually get hit while rewinding time :-) *mashes space repeatedly*
 
-- Tomasz Wesołowski
+-Tomasz Wesołowski
