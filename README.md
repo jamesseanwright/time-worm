@@ -38,3 +38,16 @@ The project is dependent upon [UglifyJS](https://github.com/mishoo/UglifyJS2) an
 
 ## Reflection
 I wrote a [blog entry](http://jamesswright.co.uk/blog/1442177-time-worm-js13kgames-entry) summarising my experiences when developing this game and how I will improve going forward.
+
+## Judges' Feedback
+> Nice parallax effect, an interesting way to show how you lose a life, cool sounds.
+
+- Ewa Mazur
+
+> Very creative, fun, could do with more polish.
+
+- Pablo Navarro
+
+> Funny I can actually get hit while rewinding time :-) *mashes space repeatedly*
+
+- Tomasz Wesołowski
