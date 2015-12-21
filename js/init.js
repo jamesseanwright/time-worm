@@ -2,7 +2,7 @@
 	'use strict';
 
 	// namespacing
-	window.jw = {
+	window.TIME_WORM = {
 		// commonly-used globals
 		gameWidth: 800,
 		gameHeight: 480
@@ -12,11 +12,11 @@
 		var canvasElements = document.querySelectorAll('canvas');
 
 		for (var i = 0; i < canvasElements.length; i++) {
-			canvasElements[i].width = jw.gameWidth;
-			canvasElements[i].height = jw.gameHeight;
+			canvasElements[i].width = TIME_WORM.gameWidth;
+			canvasElements[i].height = TIME_WORM.gameHeight;
 		}
 
-		jw.game.resetPoints();
-		jw.game.resetRewinds();
+		TIME_WORM.game.resetPoints();
+		TIME_WORM.game.resetRewinds();
 	});
 }());

@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	jw.sounds = {
+	TIME_WORM.sounds = {
 		play: function play(type) {
 			var audio = new Audio(type + '.mp3');
 			audio.play();

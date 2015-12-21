@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	var keyman = jw.keyman;
+	var keyman = TIME_WORM.keyman;
 	var speed = 5;
 	var bounceVariant = 15;
 	var bounceSpeed = 1;
@@ -36,15 +36,15 @@
 
 	function onHit() {
 		if (--health === 0) {
-			jw.game.gameOver();
+			TIME_WORM.game.gameOver();
 		}
 
 		// gnarly rendering bug hack :(
-		ctx.clearRect(0, 0, jw.gameWidth, jw.gameHeight);
+		ctx.clearRect(0, 0, TIME_WORM.gameWidth, TIME_WORM.gameHeight);
 
 		chunks = generateChunks();
 		width = spriteSize * chunks.length;
-		jw.events.add('playerHit', {
+		TIME_WORM.events.add('playerHit', {
 			x: x,
 			y: y,
 			health: health
@@ -137,7 +137,7 @@
 	});
 
 	keyman.up.onDown = function () {
-		if (jw.game.isRewinding)
+		if (TIME_WORM.game.isRewinding)
 			return;
 
 		interval = setInterval(function () {
@@ -146,7 +146,7 @@
 	};
 
 	keyman.down.onDown = function () {
-		if (jw.game.isRewinding)
+		if (TIME_WORM.game.isRewinding)
 			return;
 
 		interval = setInterval(function () {
@@ -155,7 +155,7 @@
 	};
 
 	keyman.up.onUp = keyman.down.onUp = function () {
-		jw.events.add('playerMove', {
+		TIME_WORM.events.add('playerMove', {
 			y: y
 		});
 
@@ -163,12 +163,12 @@
 	};
 
 	keyman.left.onDown = function () {
-		if (jw.game.canRewind)
-			jw.events.rewind();
+		if (TIME_WORM.game.canRewind)
+			TIME_WORM.events.rewind();
 	};
 
 	keyman.space.onDown = function () {
-		jw.laser.addBeam({
+		TIME_WORM.laser.addBeam({
 			x: width + 10,
 			y: y + 10,
 			speed: 20,
@@ -176,7 +176,7 @@
 		});
 	};
 
-	jw.player = {
+	TIME_WORM.player = {
 		getByPosition: getByPosition,
 		onHit: onHit,
 		onRewindStart: onRewindStart,
@@ -184,6 +184,6 @@
 		onPlay: onPlay
 	};
 
-	jw.events.register('playerHit', jw.player);
-	jw.events.register('playerMove', jw.player);
+	TIME_WORM.events.register('playerHit', TIME_WORM.player);
+	TIME_WORM.events.register('playerMove', TIME_WORM.player);
 }());

@@ -13,7 +13,7 @@
 	var controlsStart;
 
 	canvas.addEventListener('click', function () {	
-		jw.game.begin();
+		TIME_WORM.game.begin();
 		canvas.style.display = 'none';
 	});
 
@@ -43,12 +43,12 @@
 			ctx.fillText('Left - Rewind time for 5 seconds', rightMargin, controlsStart + titleFontSize * 4);
 		
 			ctx.font = titleFontSize + 'px ' + fontFamily;
-			ctx.fillText('Click to begin!', jw.gameWidth - rightMargin - 300, controlsStart);
+			ctx.fillText('Click to begin!', TIME_WORM.gameWidth - rightMargin - 300, controlsStart);
 
 		});
 	}
 
-	jw.instructions = {
+	TIME_WORM.instructions = {
 		render: render
 	};
 }());

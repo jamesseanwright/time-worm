@@ -11,19 +11,19 @@
 		requestAnimationFrame(function () {
 			ctx.font = primaryFontSize + 'px ' + fontFamily;
 			ctx.fillStyle = 'white';
-			ctx.fillText('Time Worm!', jw.gameWidth / 3, (jw.gameHeight / 3) - primaryFontSize);
+			ctx.fillText('Time Worm!', TIME_WORM.gameWidth / 3, (TIME_WORM.gameHeight / 3) - primaryFontSize);
 		
 			ctx.font = subtitleFontSize + 'px ' + fontFamily;
-			ctx.fillText('(c) James Wright 2015', (jw.gameWidth / 3) -70, (jw.gameHeight / 2) - subtitleFontSize + primaryFontSize);
-			ctx.fillText('jamesswright.co.uk', (jw.gameWidth / 3) -35, (jw.gameHeight / 2) + 30 + primaryFontSize);
-			ctx.fillText('Click to play!', (jw.gameWidth / 3) + 10, (jw.gameHeight / 2) + 30 + primaryFontSize + subtitleFontSize * 2);
+			ctx.fillText('(c) James Wright 2015', (TIME_WORM.gameWidth / 3) -70, (TIME_WORM.gameHeight / 2) - subtitleFontSize + primaryFontSize);
+			ctx.fillText('jamesswright.co.uk', (TIME_WORM.gameWidth / 3) -35, (TIME_WORM.gameHeight / 2) + 30 + primaryFontSize);
+			ctx.fillText('Click to play!', (TIME_WORM.gameWidth / 3) + 10, (TIME_WORM.gameHeight / 2) + 30 + primaryFontSize + subtitleFontSize * 2);
 		});
 
 		canvas.addEventListener('click', function () {
 			var instructionsCanvas = document.querySelector('#instructions');
 			instructionsCanvas.style.display = 'block';
 			canvas.style.display = 'none';
-			jw.instructions.render();
+			TIME_WORM.instructions.render();
 		});
 	});
 }());

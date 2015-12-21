@@ -26,7 +26,7 @@
 		enemies = [];
 
 		requestAnimationFrame(function () {
-			ctx.clearRect(0, 0, jw.gameWidth, jw.gameHeight);
+			ctx.clearRect(0, 0, TIME_WORM.gameWidth, TIME_WORM.gameHeight);
 		});
 	});
 
@@ -37,7 +37,7 @@
 	}
 
 	function onPlay() {
-		amnesty = jw.events.trackingThreshold; // so no more enemies are added until caught up with the present
+		amnesty = TIME_WORM.events.trackingThreshold; // so no more enemies are added until caught up with the present
 		decelerationRate = 0;
 
 		setTimeout(function () {
@@ -56,13 +56,13 @@
 
 	function addEnemy(x, y) {
 		var newEnemy = {
-			x: x || jw.gameWidth + width,
-			y: y || Math.ceil(Math.random() * jw.gameHeight),
+			x: x || TIME_WORM.gameWidth + width,
+			y: y || Math.ceil(Math.random() * TIME_WORM.gameHeight),
 
 			onHit: function onHit() {
 				this.dead = true;
-				jw.game.incrementPoints(killedScore);
-				jw.events.add('enemyDestroyed', {
+				TIME_WORM.game.incrementPoints(killedScore);
+				TIME_WORM.events.add('enemyDestroyed', {
 					x: enemy.x,
 					y: enemy.y
 				});
@@ -73,10 +73,10 @@
 	}
 
 	function nextFrame() {
-		if (jw.game.isRewinding && decelerationRate < speed * 2)
+		if (TIME_WORM.game.isRewinding && decelerationRate < speed * 2)
 			decelerationRate += 0.4
 
-		if (!jw.game.isRewinding && Date.now() - lastUpdate > Math.ceil(Math.random() * updateInterval) + amnesty) {
+		if (!TIME_WORM.game.isRewinding && Date.now() - lastUpdate > Math.ceil(Math.random() * updateInterval) + amnesty) {
 			addEnemy();
 			lastUpdate = Date.now();
 		}
@@ -90,7 +90,7 @@
 			 * subsequently be restored */
 
 			if (enemy.x + width < -(width)) {
-				jw.events.add('enemyLeftScreen', {
+				TIME_WORM.events.add('enemyLeftScreen', {
 					x: -(width),
 					y: enemy.y
 				});
@@ -100,12 +100,12 @@
 		});
 
 		enemies.forEach(function (enemy) {
-			var isLaserInitial = (!enemy.lastLaser && enemy.x + width <= jw.gameWidth);
+			var isLaserInitial = (!enemy.lastLaser && enemy.x + width <= TIME_WORM.gameWidth);
 			ctx.clearRect(enemy.x - speed - decelerationRate, enemy.y, width + speed + decelerationRate, height);
 			enemy.x -= speed - decelerationRate;
 
-			if (!jw.game.isRewinding && (isLaserInitial || Date.now() - enemy.lastLaser > laserInterval)) {
-				jw.laser.addBeam({
+			if (!TIME_WORM.game.isRewinding && (isLaserInitial || Date.now() - enemy.lastLaser > laserInterval)) {
+				TIME_WORM.laser.addBeam({
 					x: enemy.x,
 					y: enemy.y + 15,
 					speed: -15,
@@ -126,9 +126,9 @@
 		requestAnimationFrame(nextFrame);
 	});
 
-	jw.events.register('enemyAmnesty', enemy);
-	jw.events.register('enemyDestroyed', enemy);
-	jw.events.register('enemyLeftScreen', enemy);
+	TIME_WORM.events.register('enemyAmnesty', enemy);
+	TIME_WORM.events.register('enemyDestroyed', enemy);
+	TIME_WORM.events.register('enemyLeftScreen', enemy);
 
-	jw.enemy = enemy;
+	TIME_WORM.enemy = enemy;
 }());

@@ -15,37 +15,37 @@
 
 	function nextFrame() {
 		var shouldCreateClock = Date.now() - lastClock > clockInterval 
-			&& !jw.game.isRewinding 
+			&& !TIME_WORM.game.isRewinding 
 			&& !isClockPresent 
-			&& jw.game.rewinds < jw.game.maxRewinds;
+			&& TIME_WORM.game.rewinds < TIME_WORM.game.maxRewinds;
 
 		var player;
 		var hasBeenCollected;
 
 		if (shouldCreateClock) {
-			x = jw.gameWidth + spriteSize;
-			y = Math.ceil(Math.random() * jw.gameHeight);
+			x = TIME_WORM.gameWidth + spriteSize;
+			y = Math.ceil(Math.random() * TIME_WORM.gameHeight);
 			isClockPresent = true;
 		}
 
 		if (isClockPresent) {
 			ctx.clearRect(x, y, spriteSize, spriteSize);
-			player = jw.player.getByPosition(x, y, spriteSize, spriteSize);
+			player = TIME_WORM.player.getByPosition(x, y, spriteSize, spriteSize);
 			x -= speed;
 			ctx.drawImage(sprite, x, y, spriteSize, spriteSize);
 
 			if (player) {
-				jw.game.incrementRewinds();
+				TIME_WORM.game.incrementRewinds();
 				ctx.clearRect(x, y, spriteSize, spriteSize);
 				hasBeenCollected = true;
-				jw.sounds.play('collect');
+				TIME_WORM.sounds.play('collect');
 			}
 		}
 
 		if (hasBeenCollected || x + spriteSize < 0) {
 			isClockPresent = hasBeenCollected = false;
 			x = 0;
-			y = Math.ceil(Math.random() * jw.gameHeight);
+			y = Math.ceil(Math.random() * TIME_WORM.gameHeight);
 			lastClock = Date.now();
 		}
 
@@ -56,7 +56,7 @@
 		requestAnimationFrame(nextFrame);
 	});
 
-	jw.clock = {
+	TIME_WORM.clock = {
 		sprite: sprite, // image resource shared with HUD
 		spriteSize: spriteSize
 	};

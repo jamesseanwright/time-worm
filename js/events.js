@@ -31,9 +31,9 @@
 
 	function rewind(type) {
 		var startTime = Date.now();
-		jw.game.isRewinding = true;
-		jw.game.decrementRewinds();
-		jw.sounds.play('rewind');
+		TIME_WORM.game.isRewinding = true;
+		TIME_WORM.game.decrementRewinds();
+		TIME_WORM.sounds.play('rewind');
 
 		Object.keys(registrations).forEach(function (type) {
 			registrations[type].onRewindStart && registrations[type].onRewindStart();
@@ -50,14 +50,14 @@
 	}
 
 	function play() {
-		jw.game.isRewinding = false;
+		TIME_WORM.game.isRewinding = false;
 
 		Object.keys(registrations).forEach(function (type) {
 			registrations[type].onPlay && registrations[type].onPlay();
 		});
 	}
 
-	jw.events = {
+	TIME_WORM.events = {
 		add: add,
 		register: register,
 		rewind: rewind,

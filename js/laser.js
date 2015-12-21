@@ -13,7 +13,7 @@
 
 	window.addEventListener('restartgame', function () {
 		requestAnimationFrame(function () {
-			ctx.clearRect(0, 0, jw.gameWidth, jw.gameHeight);
+			ctx.clearRect(0, 0, TIME_WORM.gameWidth, TIME_WORM.gameHeight);
 		});
 
 		beams = [];
@@ -26,22 +26,22 @@
 	}
 
 	function addBeam(beam) {
-		if (jw.game.isRewinding)
+		if (TIME_WORM.game.isRewinding)
 			return;
 
-		jw.events.add('beamAdded', {
+		TIME_WORM.events.add('beamAdded', {
 			x: beam.x,
 			y: beam.y
 		});
 
 		beam.decelerationRate = 0;
 		beams.push(beam);
-		jw.sounds.play('fire');
+		TIME_WORM.sounds.play('fire');
 	}
 
 	function nextFrame() {
 		beams = beams.filter(function (beam) {
-			return (beam.x + width > 0) && beam.x <= jw.gameWidth && !beam.hasHit;
+			return (beam.x + width > 0) && beam.x <= TIME_WORM.gameWidth && !beam.hasHit;
 		});
 
 		beams.forEach(function (beam) {
@@ -49,16 +49,16 @@
 
 			ctx.clearRect(beam.x - beam.speed - beam.decelerationRate, beam.y, width + beam.speed + beam.decelerationRate, height);
 
-			target = jw[beam.target].getByPosition(beam.x, beam.y, width, height);
+			target = TIME_WORM[beam.target].getByPosition(beam.x, beam.y, width, height);
 
 			if (target) {
 				target.onHit();
 				beam.hasHit = true;
 				ctx.clearRect(beam.x, beam.y, width, height);
-				jw.sounds.play('explosion');
+				TIME_WORM.sounds.play('explosion');
 			} else {
 				// this is on unidirectional :( applies to enemyLasers only
-				if (jw.game.isRewinding && beam.isRewindable && beam.decelerationRate < Math.abs(beam.speed * 2))
+				if (TIME_WORM.game.isRewinding && beam.isRewindable && beam.decelerationRate < Math.abs(beam.speed * 2))
 					beam.decelerationRate += 0.8;
 
 				beam.x += beam.speed + beam.decelerationRate;
@@ -73,7 +73,7 @@
 
 	requestAnimationFrame(nextFrame);
 
-	jw.events.register('beamAdded', laser);
+	TIME_WORM.events.register('beamAdded', laser);
 
-	jw.laser = laser;
+	TIME_WORM.laser = laser;
 }());

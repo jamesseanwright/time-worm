@@ -23,7 +23,7 @@ mkdir dist
 
 # due to declarative nature of code, scripts
 # must be compiled in this order :( :(
-uglifyjs --screw-ie8 --mangle --reserved jw js/{init,title,instructions,game,clock,hud,keyman,events,background,sounds,laser,enemy,player}.js > dist/time-worm.min.js
+uglifyjs --screw-ie8 --mangle --reserved TIME_WORM js/{init,title,instructions,game,clock,hud,keyman,events,background,sounds,laser,enemy,player}.js > dist/time-worm.min.js
 cp index.html dist/
 cp -R img/* dist
 cp -R sounds/* dist

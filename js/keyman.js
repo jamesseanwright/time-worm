@@ -67,5 +67,5 @@
 		}
 	}
 
-	window.jw.keyman = keyman;
+	window.TIME_WORM.keyman = keyman;
 }());

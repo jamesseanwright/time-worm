@@ -5,7 +5,7 @@
 	var gameOverEvent = new Event('gameover');
 	var restartEvent = new Event('restartgame');
 
-	jw.game = {
+	TIME_WORM.game = {
 		points: 0,
 		rewinds: 0,
 		initialPoints: 0,
@@ -14,18 +14,18 @@
 		isRewinding: false,
 		incrementPoints: function incrementPoints(points) {
 			this.points += points;
-			jw.hud.renderPoints(this.points);
+			TIME_WORM.hud.renderPoints(this.points);
 		},
 
 		resetPoints: function incrementPoints(points) {
 			this.points = this.initialPoints;
-			jw.hud.renderPoints(this.points);
+			TIME_WORM.hud.renderPoints(this.points);
 		},
 
 		resetRewinds: function setRewinds() {
 			this.rewinds = this.initialRewinds;
 			this.canRewind = true;
-			jw.hud.renderRewinds(this.rewinds);
+			TIME_WORM.hud.renderRewinds(this.rewinds);
 		},
 
 		incrementRewinds: function incrementRewinds() {
@@ -33,7 +33,7 @@
 				this.rewinds++;
 
 			this.canRewind = true;
-			jw.hud.renderRewinds(this.rewinds);
+			TIME_WORM.hud.renderRewinds(this.rewinds);
 		},
 
 		decrementRewinds: function decrementRewinds() {
@@ -41,17 +41,17 @@
 				this.rewinds--;
 
 			this.canRewind = this.rewinds > 0;
-			jw.hud.renderRewinds(this.rewinds);
+			TIME_WORM.hud.renderRewinds(this.rewinds);
 		},
 
 		gameOver: function gameOver() {
 			this.canRewind = false;
 
 			if (this.isRewinding)
-				jw.events.play();
+				TIME_WORM.events.play();
 
 			window.dispatchEvent(gameOverEvent);
-			jw.hud.renderGameOver();
+			TIME_WORM.hud.renderGameOver();
 		},
 
 		begin: function begin() {
