@@ -39,6 +39,9 @@ The project is dependent upon [UglifyJS](https://github.com/mishoo/UglifyJS2) an
 ## Reflection
 I wrote a [blog entry](http://jamesswright.co.uk/blog/1442177-time-worm-js13kgames-entry) summarising my experiences when developing this game and how I will improve going forward.
 
+## Entity Component System
+I'm currently moving this project to use the [Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system) (ECS) design pattern. Progress can be tracked in the [`feature/ecs`](https://github.com/jamesseanwright/time-worm/tree/feature/ecs) branch.
+
 ## Judges' Feedback
 > Nice parallax effect, an interesting way to show how you lose a life, cool sounds.
 
