@@ -6,6 +6,9 @@ My entry for [js13kGames 2015](http://js13kgames.com/). Written using JavaScript
 
 You are the Time Worm! Your job is to destroy as many little grey men as possible. Your health is represented by the number of your body's segments, plus your head. There are no health pickups here, but if you get hit or make another mistake you can rewind time for 5 seconds and try again! Plus there's the traditional option of firing right back with your laser-firing sunglasses!
 
+## Entity Component System
+Yes, I know this code is ugly! I'm currently moving this project to use the [Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system) (ECS) design pattern. Progress can be tracked in the [`feature/ecs`](https://github.com/jamesseanwright/time-worm/tree/feature/ecs) branch.
+
 ## Browser Support
 * Latest Chrome
 * Latest Firefox (sound not working on Debian/Ubuntu? Try installing [gstreamer1.0-libav](https://packages.debian.org/search?keywords=gstreamer1.0-libav) and then restart the browser)
@@ -38,9 +41,6 @@ The project is dependent upon [UglifyJS](https://github.com/mishoo/UglifyJS2) an
 
 ## Reflection
 I wrote a [blog entry](http://jamesswright.co.uk/blog/1442177-time-worm-js13kgames-entry) summarising my experiences when developing this game and how I will improve going forward.
-
-## Entity Component System
-I'm currently moving this project to use the [Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system) (ECS) design pattern. Progress can be tracked in the [`feature/ecs`](https://github.com/jamesseanwright/time-worm/tree/feature/ecs) branch.
 
 ## Judges' Feedback
 > Nice parallax effect, an interesting way to show how you lose a life, cool sounds.
