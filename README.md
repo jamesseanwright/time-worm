@@ -6,8 +6,7 @@ My entry for [js13kGames 2015](http://js13kgames.com/). Written using JavaScript
 
 You are the Time Worm! Your job is to destroy as many little grey men as possible. Your health is represented by the number of your body's segments, plus your head. There are no health pickups here, but if you get hit or make another mistake you can rewind time for 5 seconds and try again! Plus there's the traditional option of firing right back with your laser-firing sunglasses!
 
-## Entity Component System
-Yes, I know this code is ugly! I'm currently porting this project to follow the [Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system) (ECS) design pattern. Progress can be tracked in the [`feature/ecs`](https://github.com/jamesseanwright/time-worm/tree/feature/ecs) branch.
+Yes, I know this code is ugly! I'm currently developing a [new game](https://github.com/jamesseanwright/js-platformer) that follows the [Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system) (ECS) design pattern. Progress can be tracked in the [`feature/ecs`](https://github.com/jamesseanwright/time-worm/tree/feature/ecs) branch.
 
 ## Browser Support
 * Latest Chrome
